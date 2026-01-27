@@ -1,0 +1,97 @@
+﻿/* =========================================================
+   LAYOUT HEADER (TOP BAR)
+   ========================================================= */
+
+/* -------------------------
+   HEADER CONTAINER
+-------------------------- */
+.layout-header {
+    height: 56px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+/* -------------------------
+   LEFT / RIGHT AREAS
+-------------------------- */
+.layout-header-left,
+.layout-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* -------------------------
+   TITLE / BREADCRUMB
+-------------------------- */
+.layout-header-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* -------------------------
+   ICON BUTTON (HEADER)
+-------------------------- */
+.header-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #374151;
+    transition: background .15s ease, color .15s ease;
+}
+
+    .header-btn:hover {
+        background: #f3f4f6;
+        color: #111827;
+    }
+
+/* -------------------------
+   USER MENU
+-------------------------- */
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.header-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header-user-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* -------------------------
+   RESPONSIVE
+-------------------------- */
+@media (max-width: 768px) {
+    .layout-header {
+        padding: 0 12px;
+    }
+
+    .header-user-name {
+        display: none;
+    }
+}

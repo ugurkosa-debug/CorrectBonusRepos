@@ -1,0 +1,26 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = L["AccessDeniedTitle"];
+}
+
+<div class="auth-card">
+
+    <h2 class="auth-title">
+        @L["AccessDeniedTitle"]
+    </h2>
+
+    <p class="auth-subtitle">
+        @L["AccessDeniedMessage"]
+    </p>
+
+    <div class="auth-actions">
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-primary">
+            @L["BackToHome"]
+        </a>
+    </div>
+
+</div>

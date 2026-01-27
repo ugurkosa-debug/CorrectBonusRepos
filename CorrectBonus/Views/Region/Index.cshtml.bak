@@ -1,0 +1,169 @@
+﻿@model List<CorrectBonus.Entities.Regions.Region>
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+
+
+@{
+    ViewData["Title"] = L["Region.Title"];
+
+    var search = ViewBag.Search as string;
+    var status = ViewBag.Status as string ?? "all";
+
+    // DÜZELTME: 'Has' metodu yalnızca bir parametre alıyor gibi görünüyor.
+    var canCreate = Permission.Has("REGION");
+    var canEdit = Permission.Has("REGION");
+    var canDelete = Permission.Has("REGION");
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/region.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header d-flex justify-between align-center">
+    <h1>@L["Region.Title"]</h1>
+
+    @if (canCreate)
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            @L["Common.New"]
+        </a>
+    }
+</div>
+
+<!-- FILTER BAR -->
+<form method="get" class="filter-bar">
+
+    <input type="text"
+           name="search"
+           value="@search"
+           class="form-control"
+           placeholder="@L["Common.Search"]" />
+
+    <select name="status" class="form-control">
+        @{
+            var statuses = new[]
+            {
+                new { Value = "all", Text = L["Common.All"] },
+                new { Value = "active", Text = L["Common.Active"] },
+                new { Value = "passive", Text = L["Common.Passive"] }
+                };
+        }
+
+        @foreach (var s in statuses)
+        {
+            if (s.Value == status)
+            {
+                <option value="@s.Value" selected>@s.Text</option>
+            }
+            else
+            {
+                <option value="@s.Value">@s.Text</option>
+            }
+        }
+    </select>
+
+    <button type="submit" class="btn btn-secondary">
+        @L["Common.Filter"]
+    </button>
+
+    <a asp-action="Index" class="btn btn-light">
+        @L["Common.Clear"]
+    </a>
+</form>
+
+<!-- TABLE -->
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@L["Region.Name"]</th>
+                <th>@L["Region.RegionType"]</th>
+                <th>@L["Region.ParentRegion"]</th>
+                <th>@L["Common.Status"]</th>
+                <th class="col-actions">@L["Common.Actions"]</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        @Common["NoRecord"]
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.RegionType?.Name</td>
+                        <td>@item.ParentRegion?.Name</td>
+                        <td>
+                            <span class="badge @(item.IsActive ? "badge-success" : "badge-danger")">
+                                @(item.IsActive
+                                                        ? L["Common.Active"]
+                                                        : L["Common.Passive"])
+                            </span>
+                        </td>
+
+                        <td class="col-actions">
+                            <div class="action-buttons">
+
+                                @if (canEdit)
+                                {
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-secondary">
+                                        @L["Common.Edit"]
+                                    </a>
+
+                                    <form asp-action="ToggleStatus"
+                                          asp-route-id="@item.Id"
+                                          method="post"
+                                          class="inline-form">
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit"
+                                                class="btn btn-sm btn-warning">
+                                            @(item.IsActive
+                                                                            ? L["Common.Deactivate"]
+                                                                            : L["Common.Activate"])
+                                        </button>
+                                    </form>
+                                }
+
+                                @if (canDelete)
+                                {
+                                    <form asp-action="Delete"
+                                          asp-route-id="@item.Id"
+                                          method="post"
+                                          class="inline-form"
+                                          onsubmit="return confirm('@L["Common.ConfirmDelete"]')">
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit"
+                                                class="btn btn-sm btn-danger">
+                                            @L["Common.Delete"]
+                                        </button>
+                                    </form>
+                                }
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

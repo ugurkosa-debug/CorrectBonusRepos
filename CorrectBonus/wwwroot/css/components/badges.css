@@ -1,0 +1,67 @@
+﻿/* =========================================================
+   BADGES – COMPONENT LEVEL
+   ========================================================= */
+
+/* -------------------------
+   BASE BADGE
+-------------------------- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* -------------------------
+   STATUS VARIANTS
+-------------------------- */
+
+/* ACTIVE / SUCCESS */
+.badge-success,
+.status-active {
+    background: rgba(34, 197, 94, 0.15);
+    color: #15803d;
+}
+
+/* PASSIVE / DANGER */
+.badge-danger,
+.status-passive {
+    background: rgba(220, 38, 38, 0.15);
+    color: #b91c1c;
+}
+
+/* WARNING */
+.badge-warning {
+    background: rgba(234, 179, 8, 0.18);
+    color: #854d0e;
+}
+
+/* INFO */
+.badge-info {
+    background: rgba(59, 130, 246, 0.15);
+    color: #1e40af;
+}
+
+/* SECONDARY / NEUTRAL */
+.badge-secondary {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* -------------------------
+   SIZE VARIANTS
+-------------------------- */
+.badge-sm {
+    padding: 3px 8px;
+    font-size: 11px;
+}
+
+.badge-lg {
+    padding: 5px 12px;
+    font-size: 13px;
+}

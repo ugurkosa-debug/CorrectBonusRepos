@@ -1,0 +1,33 @@
+﻿/* =========================================================
+   ROLE CREATE PAGE
+   ========================================================= */
+
+.role-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 16px;
+}
+
+.role-status {
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Checkbox */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .role-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .role-status {
+        align-items: flex-start;
+    }
+}

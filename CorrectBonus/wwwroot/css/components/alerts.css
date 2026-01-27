@@ -1,0 +1,100 @@
+﻿/* =========================================================
+   ALERTS – COMPONENT LEVEL
+   ========================================================= */
+
+/* -------------------------
+   BASE ALERT
+-------------------------- */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-radius: 8px;
+    border: 1px solid transparent;
+}
+
+/* -------------------------
+   VARIANTS
+-------------------------- */
+
+/* SUCCESS */
+.alert-success {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
+}
+
+/* ERROR / DANGER */
+.alert-danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #7f1d1d;
+}
+
+/* WARNING */
+.alert-warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #78350f;
+}
+
+/* INFO */
+.alert-info {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    color: #1e3a8a;
+}
+
+/* -------------------------
+   TEXT INSIDE ALERT
+-------------------------- */
+.alert strong {
+    font-weight: 600;
+}
+
+.alert p {
+    margin: 0;
+}
+
+/* -------------------------
+   DISMISSIBLE (OPTIONAL)
+-------------------------- */
+.alert-dismissible {
+    position: relative;
+    padding-right: 36px;
+}
+
+.alert-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: .6;
+}
+
+    .alert-close:hover {
+        opacity: 1;
+    }
+.alert-title {
+    font-weight: 600;
+}
+.alert-message {
+    flex: 1;
+}
+.alert-action {
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+.license-warning {
+    border-left: 4px solid currentColor;
+}

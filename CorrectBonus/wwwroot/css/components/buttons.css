@@ -1,0 +1,139 @@
+﻿/* =========================================================
+   BUTTONS – COMPONENT LEVEL
+   ========================================================= */
+
+/* -------------------------
+   BASE BUTTON
+-------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+
+    .btn:disabled,
+    .btn.disabled {
+        opacity: .6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .btn:active {
+        transform: translateY(0.5px);
+    }
+
+    .btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37,99,235,.25);
+    }
+
+
+/* -------------------------
+   VARIANTS
+-------------------------- */
+
+/* Primary */
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background: #1e40af;
+    }
+
+/* Secondary */
+.btn-secondary {
+    background: #64748b;
+    color: #fff;
+}
+
+    .btn-secondary:hover {
+        background: #475569;
+    }
+
+/* Danger */
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background: #b91c1c;
+    }
+
+/* Ghost / Outline */
+.btn-ghost {
+    background: transparent;
+    color: #111827;
+    border-color: #e5e7eb;
+}
+
+    .btn-ghost:hover {
+        background: #f8fafc;
+    }
+
+
+/* -------------------------
+   SIZES
+-------------------------- */
+.btn-sm {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+}
+
+.btn-lg {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 15px;
+}
+
+
+/* -------------------------
+   ICON BUTTONS
+-------------------------- */
+.btn-icon {
+    width: 40px;
+    padding: 0;
+}
+
+    .btn-icon.btn-sm {
+        width: 32px;
+    }
+
+    .btn-icon.btn-lg {
+        width: 44px;
+    }
+
+
+/* -------------------------
+   BUTTON GROUP
+-------------------------- */
+.btn-group {
+    display: inline-flex;
+    gap: 8px;
+}
+
+
+/* -------------------------
+   ACTION BUTTONS (TABLES ETC.)
+-------------------------- */
+.btn-action {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}

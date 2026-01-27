@@ -1,0 +1,30 @@
+﻿@using CorrectBonus.Services.Licensing
+@model CorrectBonus.Services.Licensing.LicenseWarningResult
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@if (Model != null)
+{
+    var cssClass = Model.Level == LicenseWarningLevel.Critical
+        ? "alert-danger"
+        : "alert-warning";
+
+    <div class="alert @cssClass license-warning">
+
+        <strong class="alert-title">
+            @(Model.Level == LicenseWarningLevel.Critical
+                    ? L["LicenseCritical"]
+                    : L["LicenseWarning"])
+        </strong>
+
+        <span class="alert-message">
+            @L["LicenseDaysLeft", Model.DaysLeft]
+        </span>
+
+        <a asp-controller="Tenants"
+           asp-action="Index"
+           class="alert-action">
+            @L["ManageLicense"]
+        </a>
+
+    </div>
+}

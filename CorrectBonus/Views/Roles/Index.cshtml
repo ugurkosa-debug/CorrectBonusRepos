@@ -1,0 +1,124 @@
+﻿@model List<CorrectBonus.Entities.Authorization.Role>
+@using CorrectBonus.Authorization
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+
+@{
+    ViewData["Title"] = L["Role.Title"];
+}
+@{
+    var canCreate = Permission.Has(PermissionRegistry.Roles.Create);
+    var canEdit = Permission.Has(PermissionRegistry.Roles.Edit);
+    var canDelete = Permission.Has(PermissionRegistry.Roles.Delete);
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/role.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header d-flex justify-between align-center">
+    <h3>@L["Role.Title"]</h3>
+
+    @if (canCreate)
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            @L["Role.Create"]
+        </a>
+    }
+</div>
+
+<!-- ALERTS -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<!-- TABLE -->
+<div class="page-content">
+    <div class="table-wrapper">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>@L["Role.Name"]</th>
+                    <th>@Common["Status"]</th>
+                    <th class="col-actions">@Common["Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="3" class="empty-row">
+                            @Common["NoRecord"]
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var role in Model)
+                    {
+                        <tr>
+                            <td>@role.Name</td>
+
+                            <td>
+                                <span class="status-badge @(role.IsActive ? "status-active" : "status-passive")">
+                                    @(role.IsActive
+                                                                ? L["Common.Active"]
+                                                                : L["Common.Passive"])
+                                </span>
+                            </td>
+
+                            <td class="col-actions">
+                                <div class="action-buttons">
+
+                                    @if (canEdit)
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@role.Id"
+                                           class="btn btn-secondary btn-sm">
+                                            @Common["Edit"]
+                                        </a>
+                                    }
+
+                                    @if (canDelete)
+                                    {
+                                        <form asp-action="Delete"
+                                              asp-route-id="@role.Id"
+                                              method="post"
+                                              class="inline-form"
+                                              onsubmit="return confirm('@Common["ConfirmDelete"]')">
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm">
+                                                @Common["Delete"]
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

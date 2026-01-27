@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- ===============================
+       INSTALLER – GENEL
+       =============================== -->
+  <data name="Installer.Title" xml:space="preserve">
+    <value>Kurulum Sihirbazı</value>
+  </data>
+
+  <data name="Installer.Step" xml:space="preserve">
+    <value>Adım</value>
+  </data>
+
+  <data name="Installer.CompletedText" xml:space="preserve">
+    <value>Kurulum başarıyla tamamlandı.</value>
+  </data>
+
+  <data name="Installer.GoToApp" xml:space="preserve">
+    <value>Uygulamaya Geç</value>
+  </data>
+
+  <data name="Installer.CreateOwner" xml:space="preserve">
+    <value>Sahip Kullanıcı Oluştur</value>
+  </data>
+
+  <!-- ===============================
+       INSTALLER – ADIM BAŞLIKLARI
+       =============================== -->
+  <data name="Installer.Step.Language" xml:space="preserve">
+    <value>Dil Seçimi</value>
+  </data>
+
+  <data name="Installer.Step.Server" xml:space="preserve">
+    <value>Sunucu Yapılandırması</value>
+  </data>
+
+  <data name="Installer.Step.DbLogin" xml:space="preserve">
+    <value>Veritabanı Girişi</value>
+  </data>
+
+  <data name="Installer.Step.Database" xml:space="preserve">
+    <value>Veritabanı Kurulumu</value>
+  </data>
+
+  <data name="Installer.Step.Mail" xml:space="preserve">
+    <value>E-posta Ayarları</value>
+  </data>
+
+  <data name="Installer.Step.Owner" xml:space="preserve">
+    <value>Uygulama Sahibi</value>
+  </data>
+
+  <data name="Installer.Step.Finish" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+
+  <!-- ===============================
+       COMMON
+       =============================== -->
+  <data name="Common.Continue" xml:space="preserve">
+    <value>Devam Et</value>
+  </data>
+
+  <data name="Common.TestAndContinue" xml:space="preserve">
+    <value>Test Et ve Devam Et</value>
+  </data>
+
+  <data name="Common.CreateAndContinue" xml:space="preserve">
+    <value>Oluştur ve Devam Et</value>
+  </data>
+
+  <data name="Common.Back" xml:space="preserve">
+    <value>Geri</value>
+  </data>
+
+  <data name="Common.Loading" xml:space="preserve">
+    <value>İşleniyor...</value>
+  </data>
+
+</root>

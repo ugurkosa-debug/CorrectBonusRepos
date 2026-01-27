@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Common.Actions" xml:space="preserve">
+    <value>Actons</value>
+  </data>
+  <data name="Common.Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Common.All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Common.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common.Clear" xml:space="preserve">
+    <value>Clear Filter</value>
+  </data>
+  <data name="Common.ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="Common.Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Common.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common.Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Common.List" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Common.New" xml:space="preserve">
+    <value>Create New Region</value>
+  </data>
+  <data name="Common.None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Common.NoRecord" xml:space="preserve">
+    <value>No Record</value>
+  </data>
+  <data name="Common.Passive" xml:space="preserve">
+    <value>Passive</value>
+  </data>
+  <data name="Common.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common.Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Common.Tree" xml:space="preserve">
+    <value>Tree</value>
+  </data>
+  <data name="Region.AddChild" xml:space="preserve">
+    <value>Add Subregion</value>
+  </data>
+  <data name="Region.Create" xml:space="preserve">
+    <value>New Region</value>
+  </data>
+  <data name="Region.DeactivateConfirm" xml:space="preserve">
+    <value>All active zones associated with the region will be deactivated. Do you agree?</value>
+  </data>
+  <data name="Region.DownloadTemplate" xml:space="preserve">
+    <value>Download Excel Template</value>
+  </data>
+  <data name="Region.Export" xml:space="preserve">
+    <value>Export Excel</value>
+  </data>
+  <data name="Region.Import" xml:space="preserve">
+    <value>Import Excel</value>
+  </data>
+  <data name="Region.ImportErrors" xml:space="preserve">
+    <value>Invalid Rows</value>
+  </data>
+  <data name="Region.ImportSuccess" xml:space="preserve">
+    <value>{0} records imported successfully.</value>
+  </data>
+  <data name="Region.ImportTitle" xml:space="preserve">
+    <value>Import Regions from Excel</value>
+  </data>
+  <data name="Region.Manager" xml:space="preserve">
+    <value>Region Manager</value>
+  </data>
+  <data name="Region.MaxLevelExceeded" xml:space="preserve">
+    <value>The permitted coefficient for this region type has been exceeded.</value>
+  </data>
+  <data name="Region.Name" xml:space="preserve">
+    <value>Region Name</value>
+  </data>
+  <data name="Region.ParentRegion" xml:space="preserve">
+    <value>Parent Region</value>
+  </data>
+  <data name="Region.RegionType" xml:space="preserve">
+    <value>Region Type</value>
+  </data>
+  <data name="Region.SearchPlaceholder" xml:space="preserve">
+    <value>Search region…</value>
+  </data>
+  <data name="Region.SelectExcel" xml:space="preserve">
+    <value>Excel File Select</value>
+  </data>
+  <data name="Region.Title" xml:space="preserve">
+    <value>Regions</value>
+  </data>
+  <data name="Region.Type" xml:space="preserve">
+    <value>Region Type</value>
+  </data>
+</root>

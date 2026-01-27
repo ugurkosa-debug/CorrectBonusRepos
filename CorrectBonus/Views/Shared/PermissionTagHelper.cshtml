@@ -1,0 +1,12 @@
+﻿@using CorrectBonus.Entities.Authorization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@{
+    // 'Has' yöntemi yalnızca bir parametre alıyor gibi görünüyor.
+    // İkinci parametreyi kaldırarak düzeltildi.
+    var canEdit = Permission.Has("USER");
+}
+
+@if (canEdit)
+{
+    <a class="btn">Düzenle</a>
+}

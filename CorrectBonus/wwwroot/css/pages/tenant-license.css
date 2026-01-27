@@ -1,0 +1,73 @@
+﻿/* =========================================================
+   TENANT LICENSE PAGE
+   ========================================================= */
+
+.page-content {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Form kartı */
+.form-card {
+    max-width: 640px;
+    width: 100%;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+}
+
+/* Form grupları */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+/* License key textarea */
+textarea.form-control {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+    resize: vertical;
+}
+
+/* Status select */
+select.form-control {
+    max-width: 240px;
+}
+
+/* Validation */
+.text-danger {
+    font-size: 12px;
+}
+
+/* Generator link */
+.btn-outline-primary {
+    margin-bottom: 12px;
+}
+
+/* Aksiyonlar */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 16px;
+    }
+
+    select.form-control {
+        max-width: 100%;
+    }
+}

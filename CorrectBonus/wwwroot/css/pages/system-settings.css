@@ -1,0 +1,146 @@
+﻿/* =========================================================
+   SYSTEM SETTINGS PAGE
+   ========================================================= */
+
+.system-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+    /* Başlık */
+    .system-settings .page-title {
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+/* ================= GRID ================= */
+
+.system-settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 16px;
+}
+
+/* ================= CARD ================= */
+
+.system-settings .form-card {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ================= HEADER ================= */
+
+.card-header {
+    padding: 12px 16px;
+    background: #f9fafb;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+}
+
+.card-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.card-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ================= BODY ================= */
+
+.card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ================= SETTING ROW ================= */
+
+.setting-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 12px;
+    align-items: center;
+}
+
+.setting-label {
+    font-size: 13px;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+/* ================= CONTROLS ================= */
+
+.setting-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-control-half {
+    max-width: 260px;
+}
+
+/* Checkbox */
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+/* Footer align radio */
+.footer-align-options {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+}
+
+/* ================= FOOTER ================= */
+
+.card-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-light);
+    background: #fafafa;
+}
+
+/* ================= IMAGE PREVIEW ================= */
+
+.setting-control img {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 4px;
+    background: #fff;
+}
+
+/* ================= SMALL TEXT ================= */
+
+.small {
+    font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .system-settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .setting-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-control-half {
+        max-width: 100%;
+    }
+}

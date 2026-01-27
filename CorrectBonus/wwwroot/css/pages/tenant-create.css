@@ -1,0 +1,66 @@
+﻿/* =========================================================
+   TENANT CREATE PAGE
+   ========================================================= */
+
+.page-content {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Form kartı */
+.form-card {
+    max-width: 520px;
+    width: 100%;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+}
+
+    /* Bölüm başlıkları */
+    .form-card h5 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: var(--color-text);
+    }
+
+    /* Ayırıcı */
+    .form-card hr {
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid var(--border-light);
+    }
+
+/* Form grupları */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+/* Hata mesajları */
+.text-danger {
+    font-size: 12px;
+}
+
+/* Aksiyonlar */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 16px;
+    }
+}

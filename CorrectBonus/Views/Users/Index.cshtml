@@ -1,0 +1,135 @@
+﻿@model List<CorrectBonus.Models.UserManagement.UserListVm>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CorrectBonus.Entities.Authorization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+@using CorrectBonus.Authorization
+
+
+
+@{
+    ViewData["Title"] = L["User.Title"];
+
+    var canCreate = Permission.Has("USERS_CREATE");
+    var canEdit = Permission.Has("USERS_EDIT");
+    var canToggle = Permission.Has("USERS_STATUS");
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/users.css"
+          asp-append-version="true" />
+}
+
+<!-- ================= PAGE HEADER ================= -->
+<div class="page-header d-flex justify-between align-center">
+    <h3 class="page-title">@L["User.Title"]</h3>
+
+    @if (canCreate)
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            @Common["Create"]
+        </a>
+    }
+</div>
+
+<!-- ================= TABLE ================= -->
+<div class="page-content">
+    <div class="table-wrapper">
+        <table class="table-custom table-users">
+            <thead>
+                <tr>
+                    <th>@L["User.FullName"]</th>
+                    <th>@L["User.Email"]</th>
+                    <th>@L["User.Role"]</th>
+                    <th>@Common["Status"]</th>
+                    <th class="col-actions">@Common["Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="empty-row">
+                            @Common["NoRecord"]
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.RoleName</td>
+                            <td>
+                                <span class="status-badge @(user.IsActive ? "status-active" : "status-passive")">
+                                    @(user.IsActive
+                                                                ? Common["Active"]
+                                                                : Common["Passive"])
+                                </span>
+                            </td>
+
+                            <td class="col-actions">
+                                <div class="action-buttons">
+
+                                    @if (canEdit)
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@user.Id"
+                                           class="btn btn-secondary btn-sm">
+                                            @Common["Edit"]
+                                        </a>
+                                    }
+
+                                    @if (canToggle)
+                                    {
+                                        <form asp-action="ToggleActive"
+                                              asp-route-id="@user.Id"
+                                              method="post"
+                                              class="inline-form">
+                                            @Html.AntiForgeryToken()
+
+                                            @if (user.IsActive)
+                                            {
+                                                <button type="submit"
+                                                        class="btn btn-warning btn-sm"
+                                                        onclick="return confirm('@L["User.DeactivateConfirm"]');">
+                                                    @Common["Deactivate"]
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit"
+                                                        class="btn btn-success btn-sm"
+                                                        onclick="return confirm('@L["User.ActivateConfirm"]');">
+                                                    @Common["Activate"]
+                                                </button>
+                                            }
+                                        </form>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        function confirmDelete() {
+            return confirm('@L["DeleteConfirm"]');
+        }
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@model CorrectBonus.Models.System.TenantLicenseVm
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/tenant-license.css"
+          asp-append-version="true" />
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        @L["PageHeader"] - @ViewBag.TenantName
+    </h3>
+</div>
+
+<div class="page-content">
+    <form asp-action="License" method="post" class="form-card">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="TenantId" />
+
+        <div class="form-group">
+            <label>@L["LicenseKey"]</label>
+<textarea asp-for="PublicKey" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="PublicKey" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label>@L["Status"]</label>
+            <select asp-for="Status" class="form-control">
+                <option value="Active">@L["Active"]</option>
+                <option value="Expired">@L["Expired"]</option>
+                <option value="Invalid">@L["Invalid"]</option>
+            </select>
+        </div>
+        @if (User.IsInRole("Owner") || true) // Owner guard zaten controller'da
+        {
+            <a asp-controller="LicenseGenerator"
+               asp-action="Index"
+               class="btn btn-outline-primary me-2">
+                @L["LicenseGenerator"]
+            </a>
+        }
+        <div class="form-actions">
+            <button class="btn btn-success">
+                @L["Save"]
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                @L["Cancel"]
+            </a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,60 @@
+﻿@model CorrectBonus.Models.System.TenantCreateVm
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/tenant-create.css"
+          asp-append-version="true" />
+}
+
+<div class="page-header">
+    <h3 class="page-title">@L["PageHeader"]</h3>
+</div>
+
+<div class="page-content">
+    <form asp-action="Create" method="post" class="form-card">
+        @Html.AntiForgeryToken()
+
+        <h5 class="mb-3">@L["TenantInfo"]</h5>
+
+        <div class="form-group">
+            <label>@L["Code"]</label>
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>@L["Name"]</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <hr />
+
+        <h5 class="mb-3">@L["AdminInfo"]</h5>
+
+        <div class="form-group">
+            <label>@L["AdminFullName"]</label>
+            <input asp-for="AdminFullName" class="form-control" />
+            <span asp-validation-for="AdminFullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>@L["AdminEmail"]</label>
+            <input asp-for="AdminEmail" class="form-control" />
+            <span asp-validation-for="AdminEmail" class="text-danger"></span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">
+                @L["CreateTenant"]
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                @L["Cancel"]
+            </a>
+        </div>
+    </form>
+</div>

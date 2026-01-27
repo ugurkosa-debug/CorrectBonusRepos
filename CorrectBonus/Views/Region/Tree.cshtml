@@ -1,0 +1,14 @@
+﻿@model List<RegionTreeDto>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.Name
+            @if (item.Children.Any())
+            {
+                @await Html.PartialAsync("Tree", item.Children)
+            }
+        </li>
+    }
+</ul>

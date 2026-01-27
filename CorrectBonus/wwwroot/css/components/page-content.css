@@ -1,0 +1,90 @@
+﻿/* =========================================================
+   PAGE CONTENT – COMPONENT LEVEL
+   ========================================================= */
+
+/* -------------------------
+   PAGE CONTENT WRAPPER
+-------------------------- */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* -------------------------
+   CONTENT SECTION
+-------------------------- */
+.page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* -------------------------
+   CARD
+-------------------------- */
+.page-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* -------------------------
+   CARD HEADER
+-------------------------- */
+.page-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.page-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* -------------------------
+   CARD BODY
+-------------------------- */
+.page-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* -------------------------
+   EMPTY STATE
+-------------------------- */
+.page-empty {
+    padding: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* -------------------------
+   PAGE ACTIONS (BOTTOM)
+-------------------------- */
+.page-actions-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* -------------------------
+   RESPONSIVE
+-------------------------- */
+@media (max-width: 768px) {
+    .page-card {
+        padding: 14px;
+    }
+
+    .page-actions-bottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

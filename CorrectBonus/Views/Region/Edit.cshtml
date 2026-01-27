@@ -1,0 +1,37 @@
+﻿@model CorrectBonus.Models.Regions.RegionFormViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["Region.EditTitle"];
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/region.css" />
+}
+
+<div class="page-header">
+    <h1>@L["Region.EditTitle"]</h1>
+</div>
+
+<div class="page-content">
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <partial name="_RegionForm" model="Model" />
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                @L["Region.Save"]
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary">
+                @L["Region.Cancel"]
+            </a>
+        </div>
+
+    </form>
+
+</div>

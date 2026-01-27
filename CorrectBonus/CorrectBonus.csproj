@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>CorrectBonus</RootNamespace>
+    <AssemblyName>CorrectBonus</AssemblyName>
+  <GenerateResourceAccessor>true</GenerateResourceAccessor>
+  <PublicResXFileCodeGenerator>true</PublicResXFileCodeGenerator>
+</PropertyGroup>
+
+
+  <ItemGroup>
+    <None Remove="Keys\private.pem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Keys\private.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Excelerator.ClosedXml" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Resources\Views\Auth\Deleted\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\license_public.pem" />
+  </ItemGroup>
+
+</Project>

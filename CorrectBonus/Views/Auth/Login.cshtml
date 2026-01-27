@@ -1,0 +1,173 @@
+﻿@model CorrectBonus.Models.Auth.LoginVm
+@inject CorrectBonus.Services.System.ISystemSettingService Settings
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+@using Microsoft.AspNetCore.Localization
+
+
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = L["Title"];
+
+    var culture = Context.Features
+        .Get<IRequestCultureFeature>()
+        ?.RequestCulture
+        .UICulture
+        .TwoLetterISOLanguageName ?? "tr";
+
+    var appName = Settings.Get("App.Name", "Correct Employee Management");
+    var appVersion = Settings.Get("App.Version", "");
+    var logoPath = Settings.Get("App.LogoPath", "");
+    var bgPath = Settings.Get("App.LoginBackgroundPath", "/images/login-bg.jpg");
+
+    // ✅ bgPath TANIMLANDIKTAN SONRA KULLAN
+    ViewData["AuthBodyStyle"] = $@"
+        background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url('{bgPath}') center / cover no-repeat;
+    ";
+}
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            @if (!string.IsNullOrWhiteSpace(logoPath))
+            {
+                <div class="login-logo">
+                    <img src="@logoPath" alt="Logo" />
+                </div>
+            }
+
+            <!-- ================= LOGIN FORM ================= -->
+                <form asp-action="Login" method="post" class="login-form">
+                @Html.AntiForgeryToken()
+
+                <!-- 🔴 LOGIN ERROR SUMMARY -->
+                <div asp-validation-summary="All" class="validation-summary"></div>
+
+
+                <div class="form-group">
+                    <label>@L["Email"]</label>
+                    <input asp-for="Email" autocomplete="username" />
+                </div>
+
+                <div class="form-group">
+                    <label>@L["Password"]</label>
+                    <input asp-for="Password" type="password" autocomplete="current-password" />
+                </div>
+
+                <button type="submit" class="btn-login">
+                    @L["Submit"]
+                </button>
+
+                <a href="javascript:void(0)"
+                   class="login-secondary"
+                   onclick="openForgotModal()">
+                    @L["ForgotPassword"]
+                </a>
+            </form>
+
+            <!-- ================= LANGUAGE FORM ================= -->
+
+
+        <div class="language-form">
+            <a asp-controller="Auth"
+               asp-action="SetLanguage"
+               asp-route-culture="tr-TR"
+               class="lang-btn @(culture.StartsWith("tr") ? "active" : "")">
+                🇹🇷
+            </a>
+
+            <a asp-controller="Auth"
+               asp-action="SetLanguage"
+               asp-route-culture="en-US"
+               class="lang-btn @(culture.StartsWith("en") ? "active" : "")">
+                🇬🇧
+            </a>
+
+        </div>
+
+
+
+            @if (!string.IsNullOrWhiteSpace(appVersion))
+            {
+                <div class="login-version">@appVersion</div>
+            }
+        </div>
+    </div>
+
+    <!-- ================= FORGOT PASSWORD MODAL ================= -->
+    <div id="forgotModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>@L["ForgotPasswordTitle"]</h3>
+
+            <input type="email"
+                   id="forgotEmail"
+                   class="form-input"
+                   placeholder="@L["EmailPlaceholder"]" />
+
+            <button type="button"
+                    class="btn-primary"
+                    onclick="sendForgotPassword()">
+                @L["Send"]
+            </button>
+
+            <button type="button"
+                    class="btn-secondary"
+                    onclick="closeForgotModal()">
+                @L["Cancel"]
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= JS LOCALIZATION ================= -->
+    <div id="i18n"
+         data-email-required="@L["EmailRequired"]">
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        function setCulture(culture) {
+            document.getElementById("cultureInput").value = culture;
+        }
+
+        function openForgotModal() {
+            document.getElementById("forgotModal").style.display = "flex";
+        }
+
+        function closeForgotModal() {
+            document.getElementById("forgotModal").style.display = "none";
+        }
+
+        async function sendForgotPassword() {
+
+            const email = document.getElementById("forgotEmail").value;
+            const i18n = document.getElementById("i18n");
+
+            if (!email) {
+                alert(i18n.dataset.emailRequired);
+                return;
+            }
+
+            const token = document.querySelector(
+                'input[name="__RequestVerificationToken"]'
+            ).value;
+
+            const response = await fetch('/Auth/ForgotPassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token
+                },
+                body: JSON.stringify({ email: email })
+            });
+
+            const text = await response.text();
+            alert(text);
+
+            if (response.ok) {
+                closeForgotModal();
+            }
+        }
+    </script>
+
+

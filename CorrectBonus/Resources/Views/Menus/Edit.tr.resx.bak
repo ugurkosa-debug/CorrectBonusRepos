@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="Menu.EditTitle">
+    <value>Kullanıcı Düzenle</value>
+  </data>
+  <data name="Menu.Title">
+    <value>Başlık</value>
+  </data>
+  <data name="Menu.Parent">
+    <value>Üst</value>
+  </data>
+  <data name="Menu.Permission">
+    <value>Yetki</value>
+  </data>
+  <data name="Menu.PermissionHint">
+    <value>Bu menüye erişim için gerekli yetki kodu</value>
+  </data>
+  <data name="Menu.Controller">
+    <value>Controller</value>
+  </data>
+  <data name="Menu.Action">
+    <value>Action</value>
+  </data>
+  <data name="Menu.Order">
+    <value>[TODO] Menu.Order</value>
+  </data>
+</root>

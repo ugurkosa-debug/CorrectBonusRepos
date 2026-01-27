@@ -1,0 +1,143 @@
+﻿/* =========================================================
+   REGION INDEX PAGE (Users ile birebir uyumlu)
+   ========================================================= */
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   FILTER BAR
+   ========================================================= */
+
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+    .filter-bar .form-control {
+        min-width: 160px;
+    }
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* 🔴 kritik – users ile aynı */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .table td {
+        font-size: 13px;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+        /* Region adı biraz geniş olabilir */
+        .table td:first-child {
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+/* =========================================================
+   STATUS BADGE (Users ile aynı)
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.status-active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-passive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================================================
+   ACTIONS COLUMN (Users standardı)
+   ========================================================= */
+
+.col-actions {
+    width: 200px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.action-buttons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+    .action-buttons .btn {
+        min-width: 72px;
+    }
+
+/* form td içinde satır bozmasın */
+.inline-form {
+    margin: 0;
+    display: inline-flex;
+}
+
+/* =========================================================
+   EMPTY ROW
+   ========================================================= */
+
+.empty-row {
+    text-align: center;
+    padding: 24px;
+    color: var(--color-text-muted);
+}
+
+/* =========================================================
+   RESPONSIVE (Users ile aynı)
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .table {
+        min-width: 760px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}

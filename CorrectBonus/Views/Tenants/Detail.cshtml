@@ -1,0 +1,147 @@
+﻿@model CorrectBonus.Models.System.TenantDetailVm
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/tenant-detail.css"
+          asp-append-version="true" />
+}
+
+
+<div class="page-header">
+    <h3 class="page-title">@L["TenantDetail"]</h3>
+
+    <div class="page-actions">
+        <button type="button"
+                class="btn btn-outline-primary"
+                onclick="enableEdit()">
+            @L["Edit"]
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            @L["Back"]
+        </a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @L[TempData["Success"]!.ToString()!]
+    </div>
+}
+
+<form asp-action="Detail"
+      method="post"
+      class="form-card form-locked"
+      id="tenantForm">
+
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <h5>@L["CompanyInfo"]</h5>
+
+    <div class="form-group">
+        <label>@L["CompanyName"]</label>
+        <input asp-for="Name" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>@L["TaxNumber"]</label>
+        <input asp-for="TaxNumber" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>@L["Address"]</label>
+        <textarea asp-for="Address" class="form-control" rows="3" readonly></textarea>
+    </div>
+
+    <h5>@L["AuthorizedPerson"]</h5>
+
+    <div class="form-group">
+        <label>@L["FullName"]</label>
+        <input asp-for="AuthorizedFullName" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>@L["Email"]</label>
+        <input asp-for="AuthorizedEmail" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>@L["Phone"]</label>
+        <input asp-for="AuthorizedPhone" class="form-control" readonly />
+    </div>
+
+    <h5>@L["InvoiceInfo"]</h5>
+
+    <div class="form-group">
+        <label>@L["InvoiceTitle"]</label>
+        <input asp-for="InvoiceTitle" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>@L["InvoiceEmail"]</label>
+        <input asp-for="InvoiceEmail" class="form-control" readonly />
+    </div>
+
+    <div class="form-actions">
+        <button type="submit"
+                class="btn btn-success"
+                id="btnSave"
+                disabled>
+            @L["Save"]
+        </button>
+
+        <button type="button"
+                class="btn btn-secondary"
+                id="btnCancel"
+                disabled
+                onclick="cancelEdit()">
+            @L["Cancel"]
+        </button>
+    </div>
+</form>
+
+<script>
+    function enableEdit() {
+        document
+            .querySelectorAll('#tenantForm input, #tenantForm textarea')
+            .forEach(el => {
+                if (el.type !== 'hidden') {
+                    el.removeAttribute('readonly');
+                }
+            });
+
+        document.getElementById('editActions')
+            .classList.remove('d-none');
+    }
+
+    function cancelEdit() {
+        window.location.reload();
+    }
+        function enableEdit() {
+
+        const form = document.getElementById('tenantForm');
+
+        // Formu aktif et
+        form.classList.remove('form-locked');
+
+        form.querySelectorAll('input, textarea').forEach(el => {
+            if (el.type !== 'hidden') {
+                el.removeAttribute('readonly');
+            }
+        });
+
+        document.getElementById('btnSave').disabled = false;
+        document.getElementById('btnCancel').disabled = false;
+    }
+
+    function cancelEdit() {
+        // En temiz yol: eski state'e dön
+        window.location.reload();
+    }
+</script>

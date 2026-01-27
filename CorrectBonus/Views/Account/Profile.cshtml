@@ -1,0 +1,171 @@
+﻿@model CorrectBonus.Models.Account.ProfileVm
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/profile.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <h3 class="page-title">@L["PageHeader"]</h3>
+</div>
+
+<div class="page-content profile-wrapper">
+
+    <div class="profile-layout">
+
+        <!-- SOL PANEL -->
+        <div class="profile-left">
+            <div class="page-card profile-card">
+                @{
+                    var avatar = Context.Session.GetString("ProfileImage");
+                    if (string.IsNullOrWhiteSpace(avatar))
+                    {
+                        avatar = ViewBag.DefaultAvatar;
+                    }
+                }
+
+                <img src="@avatar" class="profile-avatar" />
+
+                <div class="profile-name">@Model.FullName</div>
+                <div class="profile-role">@Model.RoleName</div>
+
+                <!-- FOTOĞRAF GÜNCELLE -->
+                <form asp-controller="Account"
+                      asp-action="UpdateProfilePhoto"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="profile-photo-form">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <input type="file"
+                               name="profileImage"
+                               accept="image/png,image/jpeg"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary btn-sm">
+                        @L["UpdatePhoto"]
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SAĞ PANEL -->
+        <div class="profile-right">
+
+            <!-- PROFİL BİLGİLERİ -->
+            <div class="page-card profile-box">
+                <div class="page-card-header">
+                    <div class="page-card-title">@L["ProfileInformation"]</div>
+                </div>
+
+                <form asp-controller="Account"
+                      asp-action="UpdateProfile"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="form-label">@L["FullName"]</label>
+                        <input name="FullName"
+                               value="@Model.FullName"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@L["Email"]</label>
+                        <input value="@Model.Email"
+                               class="form-control"
+                               disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@L["Permissions"]</label>
+                        <div class="permission-list">
+                            @foreach (var p in Model.Permissions)
+                            {
+                                <span class="badge badge-secondary">@p</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="page-actions-bottom">
+                        <button type="submit" class="btn btn-primary">
+                            @L["UpdateInformation"]
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- LANGUAGE -->
+            <div class="page-card profile-box">
+                <div class="page-card-header">
+                    <div class="page-card-title">@L["Language"]</div>
+                </div>
+
+                <div class="form-group">
+                    <select asp-for="PreferredLanguage" class="form-select">
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ŞİFRE DEĞİŞTİR -->
+            <div class="page-card profile-box">
+                <div class="page-card-header">
+                    <div class="page-card-title">@L["ChangePassword"]</div>
+                </div>
+
+                <form asp-controller="Account"
+                      asp-action="ChangePassword"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="form-label">@L["CurrentPassword"]</label>
+                        <input type="password"
+                               name="CurrentPassword"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@L["NewPassword"]</label>
+                        <input type="password"
+                               name="NewPassword"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">@L["ConfirmPassword"]</label>
+                        <input type="password"
+                               name="ConfirmPassword"
+                               class="form-control"
+                               required />
+                    </div>
+
+                    <div class="page-actions-bottom">
+                        <button type="submit" class="btn btn-danger">
+                            @L["ChangePasswordButton"]
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

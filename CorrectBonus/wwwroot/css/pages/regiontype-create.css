@@ -1,0 +1,104 @@
+﻿/* =========================================================
+   REGION TYPE CREATE / EDIT PAGE
+   ========================================================= */
+
+.page-content {
+    max-width: 720px;
+    margin: 0; /* ❗ ortalamayı kaldır */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ================= FORM ================= */
+
+.form-card {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text);
+    }
+
+    .form-group small {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+
+/* ================= INPUTS ================= */
+
+.form-control {
+    font-size: 13px;
+    padding: 8px 10px;
+}
+
+    /* MaxLevel alanı (number) */
+    .form-control[type="number"] {
+        max-width: 160px;
+    }
+
+/* ================= CHECK / TOGGLE ================= */
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .form-check input {
+        margin-top: 0;
+    }
+
+/* ================= ACTIONS ================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* ================= VALIDATION ================= */
+
+.validation-summary-errors {
+    background: #fee2e2;
+    color: #991b1b;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+}
+
+    .validation-summary-errors ul {
+        margin: 0;
+        padding-left: 16px;
+    }
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+    .page-content {
+        max-width: 100%;
+        padding: 0 8px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+        .form-actions .btn {
+            width: 100%;
+        }
+}

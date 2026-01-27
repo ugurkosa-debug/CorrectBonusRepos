@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - CorrectBonus Installer</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+
+    <main style="padding:40px; max-width:900px; margin:auto;">
+        @RenderBody()
+    </main>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

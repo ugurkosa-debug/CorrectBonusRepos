@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer T
+
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - CorrectBonus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CORE -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- COMPONENTS -->
+    <link rel="stylesheet" href="~/css/components/buttons.css" asp-append-version="true" />
+
+    <!-- AUTH BASE -->
+    <link rel="stylesheet" href="~/css/pages/auth-pages.css" asp-append-version="true" />
+
+
+    <!-- PAGE SPECIFIC STYLES -->
+    @RenderSection("Styles", required: false)
+</head>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<body class="auth-body">
+
+    <div class="auth-wrapper">
+        @RenderBody()
+    </div>
+
+    <!-- PAGE SCRIPTS -->
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

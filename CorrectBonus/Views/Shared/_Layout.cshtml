@@ -1,0 +1,83 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+@inject CorrectBonus.Services.Licensing.LicenseWarningService LicenseWarningService
+
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - CorrectBonus</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CORE -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- COMPONENTS -->
+    <link rel="stylesheet" href="~/css/components/buttons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/tables.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/forms.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/alerts.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/badges.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/page-header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/page-content.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/layout-header.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout/sidebar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components/license-banner.css" asp-append-version="true" />
+
+
+    <!-- PAGE SPECIFIC -->
+    @RenderSection("Styles", required: false)
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="layout-root">
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <aside class="sidebar">
+                @await Html.PartialAsync("_Sidebar")
+            </aside>
+        }
+
+        <div class="layout-main">
+
+            @{
+                var licenseWarning = await LicenseWarningService.GetWarningAsync();
+            }
+
+            @if (licenseWarning != null)
+            {
+                var bannerClass =
+                licenseWarning.Level == CorrectBonus.Services.Licensing.LicenseWarningLevel.Critical
+                ? "license-banner danger"
+                : "license-banner warning";
+
+                <div class="@bannerClass">
+                    <span class="license-banner-text">
+                        @L["LicenseCriticalMessage", licenseWarning.DaysLeft]
+                    </span>
+                </div>
+            }
+
+            <main class="layout-content">
+                @RenderBody()
+            </main>
+
+            <footer class="app-footer">
+                © 2025 CorrectEmployeeManagement by Ugur Kosa
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

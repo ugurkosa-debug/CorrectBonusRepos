@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer T
+
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = T["AccountLockedTitle"];
+}
+
+<div class="auth-card">
+
+    <h2 class="auth-title">@T["AccountLockedTitle"]</h2>
+
+    <p class="auth-subtitle">
+        @T["AccountLockedDescription"]
+    </p>
+
+    <a href="@Url.Action("Login", "Auth")"
+       class="btn-primary">
+        @T["BackToLogin"]
+    </a>
+
+</div>

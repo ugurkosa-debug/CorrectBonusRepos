@@ -1,0 +1,99 @@
+﻿@model List<CorrectBonus.Models.MenuManagement.MenuListVm>
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+
+@{
+    ViewData["Title"] = L["Menu.Title"];
+
+    var canCreate = Permission.Has("MENU"); // Düzeltildi: Sadece bir parametre ile çağrıldı
+    var canEdit = Permission.Has("MENU");   // Düzeltildi: Sadece bir parametre ile çağrıldı
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/menu.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header d-flex justify-between align-center">
+    <h3>@L["Menu.Title"]</h3>
+
+    <!-- CREATE -->
+    @if (canCreate)
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            @Common["New"]
+        </a>
+    }
+</div>
+
+<!-- TABLE -->
+<div class="table-wrapper">
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>@L["Menu.Title"]</th>
+                <th>@L["Menu.Permission"]</th>
+                <th>@Common["Status"]</th>
+                <th class="col-actions">@Common["Actions"]</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="empty-row">
+                        @Common["NoRecord"]
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+
+                        <td>
+                            @if (string.IsNullOrWhiteSpace(item.PermissionCode))
+                            {
+                                <span class="text-muted">-</span>
+                            }
+                            else
+                            {
+                                @item.PermissionCode
+                            }
+                </td>
+
+                <td>
+                    <span class="status-badge @(item.IsActive ? "status-active" : "status-passive")">
+                        @(item.IsActive
+                                                ? L["Common.Active"]
+                                                : L["Common.Passive"])
+                            </span>
+                        </td>
+
+                        <td class="col-actions">
+                            @if (canEdit)
+                            {
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-secondary btn-sm">
+                                    @Common["Edit"]
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

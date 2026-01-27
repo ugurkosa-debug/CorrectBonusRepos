@@ -1,0 +1,137 @@
+﻿@model CorrectBonus.Services.Licensing.LicensePayload
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+    var selectedModules = Model.Modules ?? Array.Empty<string>();
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/license-generate.css"
+          asp-append-version="true" />
+}
+
+
+<div class="page-header">
+    <h3 class="page-title">@L["PageHeader"]</h3>
+
+    <div class="page-actions">
+        <a asp-controller="Tenants"
+           asp-action="Index"
+           class="btn btn-secondary">
+            ← @L["Back"]
+        </a>
+    </div>
+</div>
+
+<div class="page-content">
+
+    <div class="page-card">
+
+        <form asp-action="Generate" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- TENANT -->
+            <div class="form-group">
+                <label class="form-label">@L["TenantCode"]</label>
+                <input name="tenant"
+                       value="@Model.Tenant"
+                       class="form-control"
+                       required />
+            </div>
+
+            <!-- EXPIRATION -->
+            <div class="form-group">
+                <label class="form-label">@L["ExpirationDate"]</label>
+                <input name="exp"
+                       type="date"
+                       value="@Model.Exp.ToString("yyyy-MM-dd")"
+                       class="form-control"
+                       required />
+            </div>
+
+            <!-- MODULES -->
+            <div class="form-group">
+                <label class="form-label">@L["Modules"]</label>
+
+                <div class="checkbox-list">
+                    <label class="checkbox-item">
+                        <input type="checkbox"
+                               name="modules"
+                               value="HR"
+                               @(selectedModules.Contains("HR") ? "checked" : "") />
+                        @L["ModuleHR"]
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input type="checkbox"
+                               name="modules"
+                               value="PAYROLL"
+                               @(selectedModules.Contains("PAYROLL") ? "checked" : "") />
+                        @L["ModulePayroll"]
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input type="checkbox"
+                               name="modules"
+                               value="BONUS"
+                               @(selectedModules.Contains("BONUS") ? "checked" : "") />
+                        @L["ModuleBonus"]
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input type="checkbox"
+                               name="modules"
+                               value="LEAVE"
+                               @(selectedModules.Contains("LEAVE") ? "checked" : "") />
+                        @L["ModuleLeave"]
+                    </label>
+                </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="form-actions">
+                <button type="submit"
+                        class="btn btn-primary">
+                    @L["Generate"]
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- GENERATED LICENSE -->
+    @if (ViewBag.PublicKey != null)
+    {
+        <div class="page-card">
+            <div class="page-card-header">
+                <div class="page-card-title">@L["GeneratedKey"]</div>
+            </div>
+
+            <div class="page-card-body license-result">
+                <input id="licenseKeyBox"
+                       type="text"
+                       class="form-control"
+                       readonly
+                       value="@ViewBag.PublicKey" />
+
+                <button type="button"
+                        class="btn btn-primary"
+                        onclick="copyLicenseKey()">
+                    @L["Copy"]
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function copyLicenseKey() {
+            const input = document.getElementById("licenseKeyBox");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value);
+            alert("@L["Copied"]");
+        }
+    </script>
+}

@@ -1,0 +1,575 @@
+﻿/* =========================================================
+   AUTH PAGES (RESET / LOCK / DENIED / INVALID)
+   ========================================================= */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ortalayıcı */
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Kart */
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+/* Başlık */
+.auth-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Alt başlık */
+.auth-subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Alan */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+/* Input */
+.form-input {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+    .form-input:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+/* Validation */
+.validation-summary {
+    font-size: 13px;
+}
+
+/* Primary button */
+.btn-primary {
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background: #1d4ed8;
+    }
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 20px;
+    }
+}
+/* =========================================================
+   AUTH BASE
+   ========================================================= */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111827;
+}
+
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* =========================================================
+   AUTH CARD (LOGIN + RESET + LOCKED)
+   ========================================================= */
+
+.auth-card,
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+}
+
+/* =========================================================
+   TITLES
+   ========================================================= */
+
+.auth-title,
+.forgot-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.auth-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.login-form,
+.forgot-form,
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+    .form-group label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #374151;
+    }
+
+.form-input,
+.login-form input {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-primary,
+.btn-login {
+    height: 42px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .btn-primary:hover,
+    .btn-login:hover {
+        background: #1e40af;
+    }
+
+/* =========================================================
+   SECONDARY ACTION
+   ========================================================= */
+
+.login-secondary {
+    font-size: 13px;
+    text-align: center;
+    color: #2563eb;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+.validation-summary,
+.text-danger {
+    font-size: 13px;
+    color: #dc2626;
+}
+
+/ /* =========================================================
+   LANGUAGE SELECTOR
+   ========================================================= */
+.language-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.login-language-toggle {
+    display: flex;
+    gap: 10px;
+}
+
+/* Base button / link */
+.lang-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* <a> için */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
+}
+
+    /* Hover */
+    .lang-btn:hover {
+        border-color: #2563eb;
+        background-color: #f9fafb;
+    }
+
+    /* Active (seçili dil) */
+    .lang-btn.active {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+        background-color: #ffffff;
+    }
+
+    /* Click feedback */
+    .lang-btn:active {
+        transform: scale(0.96);
+    }
+
+    /* Keyboard accessibility */
+    .lang-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #2563eb;
+    }
+
+    /* Flag image */
+    .lang-btn img {
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+    }
+
+/* =========================================================
+   VERSION
+   ========================================================= */
+
+.login-version {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: center;
+}
+
+/* =========================================================
+   MODAL (FORGOT PASSWORD)
+   ========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 22px;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+/* =========================================================
+   AUTH PAGES (LOGIN / FORGOT)
+   ========================================================= */
+
+.forgot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.forgot-title {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.forgot-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* =========================================================
+   AUTH BASE
+   ========================================================= */
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111827;
+}
+
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* =========================================================
+   LOGIN LAYOUT
+   ========================================================= */
+
+.login-wrapper {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+    .login-logo img {
+        max-width: 220px;
+        height: auto;
+    }
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+    .login-form .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .login-form label {
+        font-size: 13px;
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .login-form input {
+        height: 40px;
+        padding: 0 12px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+    }
+
+/* =========================================================
+   LOGIN BUTTONS
+   ========================================================= */
+
+.btn-login {
+    height: 42px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .btn-login:hover {
+        background: #1e40af;
+    }
+
+.login-secondary {
+    margin-top: 4px;
+    font-size: 13px;
+    text-align: center;
+    color: #2563eb;
+    cursor: pointer;
+    text-decoration: none;
+}
+/* Secondary / Cancel button */
+.btn-secondary {
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+    .btn-secondary:hover {
+        background: #e5e7eb;
+    }
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+.validation-summary {
+    font-size: 13px;
+    color: #dc2626;
+}
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+.language-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.login-language-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.lang-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    cursor: pointer;
+    padding: 0;
+}
+
+    .lang-btn.active {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37,99,235,.25);
+    }
+
+    .lang-btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+/* =========================================================
+   VERSION
+   ========================================================= */
+
+.login-version {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: center;
+}
+
+/* =========================================================
+   MODAL (FORGOT PASSWORD)
+   ========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 22px;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+    .modal-box h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .modal-box .form-input {
+        height: 40px;
+        padding: 0 12px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+    }

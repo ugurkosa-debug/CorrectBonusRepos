@@ -1,0 +1,92 @@
+﻿@model CorrectBonus.Entities.Regions.RegionType
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+@using Microsoft.AspNetCore.Mvc.Localization
+
+
+
+
+@{
+    ViewData["Title"] = L["RegionType.Form"];
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/regiontype-create.css"
+          asp-append-version="true" />
+}
+
+<div class="page-header">
+    <h3>@L["RegionType.Form"]</h3>
+</div>
+
+<div class="page-content">
+
+    <form method="post">
+
+        @Html.AntiForgeryToken()
+
+        <!-- CARD -->
+        <div class="form-card">
+
+            <!-- VALIDATION -->
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary-errors"></div>
+
+            <!-- NAME -->
+            <div class="form-group">
+                <label asp-for="Name">
+                    @L["RegionType.Name"]
+                </label>
+
+                <input asp-for="Name"
+                       class="form-control"
+                       required />
+
+                <span asp-validation-for="Name"></span>
+            </div>
+
+            <!-- MAX LEVEL -->
+            <div class="form-group">
+                <label asp-for="MaxLevel">
+                    @L["RegionType.MaxLevel"]
+                </label>
+
+                <input asp-for="MaxLevel"
+                       type="number"
+                       min="0"
+                       class="form-control" />
+
+                <small>
+                    0 = @L["Common.Unlimited"]
+                </small>
+            </div>
+
+            <!-- ACTIVE -->
+            <div class="form-group form-check">
+                <input asp-for="IsActive"
+                       type="checkbox" />
+
+                <label asp-for="IsActive">
+                    @Common["Active"]
+                </label>
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+            <button type="submit"
+                    class="btn btn-primary">
+                @L["Common.Save"]
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                @L["Common.Cancel"]
+            </a>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,121 @@
+﻿@model CorrectBonus.Models.MenuManagement.MenuEditVm
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["Menu.EditTitle"];
+
+    var canEdit = Permission.Has("MENU"); // İkinci parametre kaldırıldı
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/menu-edit.css"
+          asp-append-version="true" />
+}
+
+<div class="page-header">
+    <h3>@L["Menu.EditTitle"]</h3>
+</div>
+
+<div class="page-content">
+
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-card">
+
+            <!-- TITLE -->
+            <div class="form-group">
+                <label asp-for="Title">@L["Menu.Title"]</label>
+                <input asp-for="Title"
+                       class="form-control"
+                       required />
+            </div>
+
+            <!-- PARENT -->
+            <div class="form-group">
+                <label asp-for="ParentId">@L["Menu.Parent"]</label>
+                <select asp-for="ParentId" class="form-select">
+                    <option value="">@L["Common.None"]</option>
+                    @foreach (var p in Model.ParentMenus)
+                    {
+                        <option value="@p.Id">@p.Title</option>
+                    }
+                </select>
+            </div>
+
+            <!-- PERMISSION -->
+            <div class="form-group">
+                <label asp-for="PermissionCode">@L["Menu.Permission"]</label>
+                <select asp-for="PermissionCode"
+                        class="form-select"
+                        required>
+                    <option value="">@L["Common.Select"]</option>
+                    @foreach (var perm in Model.Permissions)
+                    {
+                        <option value="@perm.Code">
+                            @perm.Code
+                        </option>
+                    }
+                </select>
+                <small class="text-muted">
+                    @L["Menu.PermissionHint"]
+                </small>
+            </div>
+
+            <!-- CONTROLLER -->
+            <div class="form-group">
+                <label asp-for="Controller">@L["Menu.Controller"]</label>
+                <input asp-for="Controller"
+                       class="form-control" />
+            </div>
+
+            <!-- ACTION -->
+            <div class="form-group">
+                <label asp-for="Action">@L["Menu.Action"]</label>
+                <input asp-for="Action"
+                       class="form-control" />
+            </div>
+
+            <!-- ORDER -->
+            <div class="form-group">
+                <label asp-for="Order">@L["Menu.Order"]</label>
+                <input asp-for="Order"
+                       type="number"
+                       class="form-control" />
+            </div>
+
+            <!-- ACTIVE -->
+            <div class="form-group form-check">
+                <input asp-for="IsActive"
+                       type="checkbox" />
+                <label asp-for="IsActive">
+                    @L["Common.Active"]
+                </label>
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+            @if (canEdit)
+            {
+                <button type="submit"
+                        class="btn btn-primary">
+                    @L["Common.Save"]
+                </button>
+            }
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                @L["Common.Cancel"]
+            </a>
+        </div>
+
+    </form>
+</div>

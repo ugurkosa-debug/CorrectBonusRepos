@@ -1,0 +1,111 @@
+﻿/* =========================================================
+   TENANTS INDEX PAGE
+   ========================================================= */
+
+/* Sayfa içeriği */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ================= TABLE ================= */
+
+.table-tenants th {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.table-tenants td {
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+/* ================= MODULES ================= */
+
+.tenant-modules {
+    max-width: 260px;
+}
+
+.modules-inline {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.module-badge {
+    background: #e5f0ff;
+    color: #1d4ed8;
+    font-size: 11px;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.module-sep {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.module-more {
+    font-size: 11px;
+    color: #6b7280;
+    margin-left: 4px;
+}
+
+/* ================= LICENSE STATUS ================= */
+
+.license-status-link {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .license-status-link.text-success {
+        color: #16a34a;
+    }
+
+    .license-status-link.text-danger {
+        color: #dc2626;
+    }
+
+/* ================= EXPIRE ================= */
+
+.text-danger.fw-bold {
+    font-weight: 600;
+}
+
+/* ================= ACTIONS ================= */
+
+.action-buttons {
+    display: inline-flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+/* ================= EMPTY ================= */
+
+.empty-row {
+    text-align: center;
+    padding: 24px;
+    color: var(--color-text-muted);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1200px) {
+    .tenant-modules {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .table-tenants {
+        min-width: 900px;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}

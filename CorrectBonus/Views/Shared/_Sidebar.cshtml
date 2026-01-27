@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject CorrectBonus.Services.System.MenuService MenuService
+@inject CorrectBonus.Services.System.ISystemSettingService Settings
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+
+@{
+    var appName = Settings.Get("App.Name", "Correct Employee Management");
+    var logoPath = Settings.Get("App.LogoPath", "");
+
+    var avatar = Context.Session.GetString("ProfileImage");
+    if (string.IsNullOrWhiteSpace(avatar))
+    {
+        avatar = "/images/avatars/user.png";
+    }
+
+    var menus = MenuService.GetUserMenus();
+
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+    var culture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+}
+
+<!-- HEADER -->
+<div class="sidebar-header">
+    @if (!string.IsNullOrWhiteSpace(logoPath))
+    {
+        <img src="@logoPath" class="sidebar-logo" />
+    }
+    <div class="sidebar-app-name">@appName</div>
+</div>
+
+<!-- MENU -->
+<ul class="sidebar-menu">
+
+    <li class="dashboard">
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="sidebar-link @(currentController == "Home" ? "active" : "")">
+            @Common["Menu.Dashboard"]
+        </a>
+    </li>
+
+    @foreach (var parent in menus)
+    {
+        if (string.IsNullOrWhiteSpace(parent.ResourceKey))
+        {
+            throw new InvalidOperationException(
+            $"Menu ResourceKey boş. MenuId={parent.Id}");
+        }
+
+        var children = parent.Children.OrderBy(c => c.Order).ToList();
+
+        var isOpen = children.Any(c =>
+        string.Equals(c.Controller, currentController, StringComparison.OrdinalIgnoreCase));
+
+        <li class="sidebar-item @(isOpen ? "open" : "")">
+
+            @if (children.Any())
+            {
+                <button type="button"
+                        class="sidebar-link sidebar-parent-link @(isOpen ? "active" : "")"
+                        aria-expanded="@isOpen.ToString().ToLower()">
+                    <span>@Common[parent.ResourceKey]</span>
+                    <span class="arrow"></span>
+                </button>
+            }
+            else
+            {
+                <a asp-controller="@parent.Controller"
+                   asp-action="@parent.Action"
+                   class="sidebar-link @(isOpen ? "active" : "")">
+                    @Common[parent.ResourceKey]
+                </a>
+            }
+
+            @if (children.Any())
+            {
+                <ul class="sidebar-sub">
+                    @foreach (var child in children)
+                    {
+                        if (string.IsNullOrWhiteSpace(child.ResourceKey))
+                        {
+                            throw new InvalidOperationException(
+                            $"Menu ResourceKey boş. MenuId={child.Id}");
+                        }
+
+                        var isActive =
+                        string.Equals(child.Controller, currentController, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(child.Action, currentAction, StringComparison.OrdinalIgnoreCase);
+
+                        <li>
+                            <a asp-controller="@child.Controller"
+                               asp-action="@child.Action"
+                               class="sidebar-link @(isActive ? "active" : "")">
+                                @Common[child.ResourceKey]
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+</ul>
+
+<!-- ================= SIDEBAR FOOTER ================= -->
+<div class="sidebar-footer">
+
+    <!-- USER PROFILE -->
+    <a href="/Account/Profile" class="sidebar-user">
+        <img src="@avatar" class="sidebar-user-avatar" />
+
+        <div class="sidebar-user-meta">
+            <div class="sidebar-user-name">
+                @Context.Session.GetString("FullName")
+            </div>
+            <div class="sidebar-user-tenant">
+                @Context.Session.GetString("TenantName")
+            </div>
+        </div>
+    </a>
+
+    <!-- LANGUAGE -->
+    <form asp-controller="Home"
+          asp-action="ChangeLanguage"
+          method="post"
+          class="sidebar-language-form">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+
+        <select name="culture"
+                onchange="this.form.submit()"
+                class="sidebar-language-select">
+            <option value="tr-TR" selected="@culture.StartsWith("tr")">TR Türkçe</option>
+            <option value="en-US" selected="@culture.StartsWith("en")">EN English</option>
+        </select>
+    </form>
+
+    <!-- LOGOUT -->
+    <form asp-controller="Auth"
+          asp-action="Logout"
+          method="post"
+          class="sidebar-logout-form">
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn-logout">
+            @Common["Menu.Logout"]
+        </button>
+    </form>
+
+</div>
+

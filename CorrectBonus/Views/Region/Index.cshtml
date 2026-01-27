@@ -1,0 +1,172 @@
+﻿@model List<CorrectBonus.Entities.Regions.Region>
+@using CorrectBonus.Authorization
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
+
+
+@{
+    ViewData["Title"] = L["Region.Title"];
+
+    var search = ViewBag.Search as string;
+    var status = ViewBag.Status as string ?? "all";
+}
+@{
+    var canCreate = Permission.Has(PermissionRegistry.Regions.Create);
+    var canEdit = Permission.Has(PermissionRegistry.Regions.Edit);
+    var canDelete = Permission.Has(PermissionRegistry.Regions.Delete);
+    var canStatus = Permission.Has(PermissionRegistry.Regions.Status);
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/region.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header d-flex justify-between align-center">
+    <h3>@L["Region.Title"]</h3>
+
+    @if (canCreate)
+    {
+        <a asp-action="Create"
+           class="btn btn-primary">
+            @Common["New"]
+        </a>
+    }
+</div>
+
+<!-- FILTER BAR -->
+<form method="get" class="filter-bar">
+
+    <input type="text"
+           name="search"
+           value="@search"
+           class="form-control"
+           placeholder="@Common["Search"]" />
+
+    <select name="status" class="form-control">
+        @{
+            var statuses = new[]
+            {
+                new { Value = "all", Text = L["Common.All"] },
+                new { Value = "active", Text = L["Common.Active"] },
+                new { Value = "passive", Text = L["Common.Passive"] }
+                };
+        }
+
+        @foreach (var s in statuses)
+        {
+            if (s.Value == status)
+            {
+                <option value="@s.Value" selected>@s.Text</option>
+            }
+            else
+            {
+                <option value="@s.Value">@s.Text</option>
+            }
+        }
+    </select>
+
+    <button type="submit" class="btn btn-secondary">
+        @Common["Filter"]
+    </button>
+
+    <a asp-action="Index" class="btn btn-light">
+        @Common["Clear"]
+    </a>
+</form>
+
+<!-- TABLE -->
+<div class="page-content">
+    <div class="table-wrapper">
+        <table class="table-custom table-users">
+            <thead>
+                <tr>
+                    <th>@L["Region.Name"]</th>
+                    <th>@L["Region.RegionType"]</th>
+                    <th>@L["Region.ParentRegion"]</th>
+                    <th>@Common["Status"]</th>
+                    <th class="col-actions">@Common["Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="empty-row">
+                            @Common["NoRecord"]
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.RegionType?.Name</td>
+                            <td>@item.ParentRegion?.Name</td>
+                            <td>
+                                <span class="badge @(item.IsActive ? "badge-success" : "badge-danger")">
+                                    @(item.IsActive
+                                                            ? L["Common.Active"]
+                                                            : L["Common.Passive"])
+                                </span>
+                            </td>
+
+                            <td class="col-actions">
+                                <div class="action-buttons">
+
+                                    @if (canEdit)
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-secondary">
+                                            @Common["Edit"]
+                                        </a>
+
+                                        <form asp-action="ToggleStatus"
+                                              asp-route-id="@item.Id"
+                                              method="post"
+                                              class="inline-form">
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-warning">
+                                                @(item.IsActive
+                                                                                ? L["Common.Deactivate"]
+                                                                                : L["Common.Activate"])
+                                            </button>
+                                        </form>
+                                    }
+
+                                    @if (canDelete)
+                                    {
+                                        <form asp-action="Delete"
+                                              asp-route-id="@item.Id"
+                                              method="post"
+                                              class="inline-form"
+                                              onsubmit="return confirm('@Common["ConfirmDelete"]')">
+                                            @Html.AntiForgeryToken()
+
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger">
+                                                @Common["Delete"]
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

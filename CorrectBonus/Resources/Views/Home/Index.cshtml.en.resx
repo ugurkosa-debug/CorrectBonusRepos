@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+
+  <!-- PAGE -->
+  <data name="Title" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+
+  <data name="Subtitle" xml:space="preserve">
+    <value>You can see your system overview below</value>
+  </data>
+
+  <!-- CARDS -->
+  <data name="TotalUsers" xml:space="preserve">
+    <value>Total Users</value>
+  </data>
+
+  <data name="ActiveUsers" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+
+  <data name="TotalRoles" xml:space="preserve">
+    <value>Total Roles</value>
+  </data>
+
+  <data name="SystemStatus" xml:space="preserve">
+    <value>System Status</value>
+  </data>
+
+  <!-- STATUS -->
+  <data name="StatusHealthy" xml:space="preserve">
+    <value>Healthy</value>
+  </data>
+
+  <data name="StatusWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+
+  <data name="StatusError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+
+</root>

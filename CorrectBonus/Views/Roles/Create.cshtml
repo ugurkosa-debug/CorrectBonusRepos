@@ -1,0 +1,67 @@
+﻿@model CorrectBonus.Models.RoleManagement.RoleCreateVm
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+
+    var canCreate = Permission.Has("ROLE"); // İkinci parametre kaldırıldı
+}
+
+<div class="page-header">
+    <h3 class="page-title">@L["PageHeader"]</h3>
+</div>
+
+<div class="page-content">
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="page-card">
+
+            <div class="role-form-grid">
+
+                <div class="form-group">
+                    <label asp-for="Name" class="form-label">
+                        @L["RoleName"]
+                    </label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="field-error"></span>
+                </div>
+
+                <div class="form-group role-status">
+                    <label class="form-label">&nbsp;</label>
+
+                    <label class="checkbox-item">
+                        <input asp-for="IsActive" type="checkbox" />
+                        <span>@L["Active"]</span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="page-actions-bottom">
+                @if (canCreate)
+                {
+                    <button type="submit" class="btn btn-primary">
+                        @L["Save"]
+                    </button>
+                }
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    @L["Cancel"]
+                </a>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/role-create.css"
+          asp-append-version="true" />
+}

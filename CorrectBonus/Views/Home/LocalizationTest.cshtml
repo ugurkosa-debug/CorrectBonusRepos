@@ -1,0 +1,22 @@
+﻿
+<h3>Kültür Değiştir</h3>
+<form method="post" action="@Url.Action("ChangeLanguage", "Home")" style="display:inline;">
+    <input type="hidden" name="culture" value="tr" />
+    <input type="hidden" name="returnUrl" value="@Url.Action("LocalizationTest", "Home")" />
+    <button type="submit" class="btn">TR</button>
+</form>
+<form method="post" action="@Url.Action("ChangeLanguage", "Home")" style="display:inline;">
+    <input type="hidden" name="culture" value="tr-TR" />
+    <input type="hidden" name="returnUrl" value="@Url.Action("LocalizationTest", "Home")" />
+    <button type="submit" class="btn">tr-TR</button>
+</form>
+<form method="post" action="@Url.Action("ChangeLanguage", "Home")" style="display:inline;">
+    <input type="hidden" name="culture" value="en" />
+    <input type="hidden" name="returnUrl" value="@Url.Action("LocalizationTest", "Home")" />
+    <button type="submit" class="btn">EN</button>
+</form>
+<form method="post" action="@Url.Action("ChangeLanguage", "Home")" style="display:inline;">
+    <input type="hidden" name="culture" value="en-US" />
+    <input type="hidden" name="returnUrl" value="@Url.Action("LocalizationTest", "Home")" />
+    <button type="submit" class="btn">en-US</button>
+</form>

@@ -1,0 +1,192 @@
+﻿@model List<CorrectBonus.Models.System.TenantListVm>
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["Tenant.Title"];
+
+    var canCreateTenant = Permission.Has("TENANT"); // Düzeltildi: Sadece bir parametre ile çağrıldı
+    var canEditTenant = Permission.Has("TENANT");   // Düzeltildi: Sadece bir parametre ile çağrıldı
+    var canCreateLicense = Permission.Has("LICENSE"); // Düzeltildi: Sadece bir parametre ile çağrıldı
+}
+...
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/tenants.css"
+          asp-append-version="true" />
+}
+
+<!-- PAGE HEADER -->
+<div class="page-header d-flex justify-between align-center">
+    <h3 class="page-title">@L["Tenant.Title"]</h3>
+
+    <div class="page-actions">
+        @if (canCreateTenant)
+        {
+            <a asp-action="Create"
+               class="btn btn-primary">
+                @L["Tenant.Create"]
+            </a>
+        }
+
+        @if (canCreateLicense)
+        {
+            <a asp-controller="LicenseGenerator"
+               asp-action="Index"
+               class="btn btn-primary">
+                @L["Tenant.LicenseGenerator"]
+            </a>
+        }
+    </div>
+</div>
+
+<!-- TABLE -->
+<div class="page-content">
+    <div class="table-wrapper">
+        <table class="table-custom table-tenants">
+            <thead>
+                <tr>
+                    <th>@L["Tenant.Code"]</th>
+                    <th>@L["Tenant.Name"]</th>
+                    <th>@L["Tenant.Modules"]</th>
+                    <th>@L["Tenant.LicenseStatus"]</th>
+                    <th>@L["Tenant.LicenseStart"]</th>
+                    <th>@L["Tenant.LicenseExpire"]</th>
+                    <th>@L["Common.Status"]</th>
+                    <th class="text-center">@L["Common.Actions"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="8" class="empty-row">
+                            @L["Common.NoRecord"]
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var t in Model)
+                    {
+                        var isExpired =
+                        t.ExpireAt.HasValue &&
+                        t.ExpireAt.Value.Date < DateTime.Today;
+
+                        <tr>
+                            <td>@t.Code</td>
+                            <td>@t.Name</td>
+
+                            <!-- MODULES -->
+                            <td class="tenant-modules">
+                                @{
+                                    var modules = t.ActiveModules ?? new List<string>();
+                                    var visible = modules.Take(3).ToList();
+                                    var hiddenCount = modules.Count - visible.Count;
+                                }
+
+                                @if (!modules.Any())
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                                else
+                                {
+                                    <span class="modules-inline"
+                                          title="@string.Join(" • ", modules)">
+                                        @for (int i = 0; i < visible.Count; i++)
+                                        {
+                                            <span class="module-badge">@visible[i]</span>
+                                            @if (i < visible.Count - 1)
+                                            {
+                                                <span class="module-sep">•</span>
+                                            }
+                                        }
+
+                                        @if (hiddenCount > 0)
+                                        {
+                                            <span class="module-more">
+                                                +@hiddenCount
+                                            </span>
+                                        }
+                                    </span>
+                                }
+                            </td>
+
+                            <!-- LICENSE STATUS -->
+                            <td>
+                                @if (canEditTenant)
+                                {
+                                    <a asp-action="License"
+                                       asp-route-id="@t.Id"
+                                       class="license-status-link @(t.LicenseStatus == "Active" ? "text-success" : "text-danger")">
+                                        @t.LicenseStatus
+                                    </a>
+                                }
+                                else
+                                {
+                                    @t.LicenseStatus
+                                }
+                    </td>
+
+                    <!-- LICENSE START -->
+                    <td>
+                        @t.CreatedAt.ToString("d")
+                    </td>
+
+                    <!-- LICENSE EXPIRE -->
+                    <td class="@(isExpired ? "text-danger fw-bold" : "")">
+                        @(t.ExpireAt.HasValue
+                                                ? t.ExpireAt.Value.ToString("d")
+                                                : "-")
+                            </td>
+
+                            <!-- TENANT STATUS -->
+                            <td>
+                                @(t.IsActive
+                                                        ? L["Common.Active"]
+                                                        : L["Common.Passive"])
+                            </td>
+
+                            <!-- ACTIONS -->
+                            <td class="text-center">
+                                <div class="action-buttons">
+
+                                    @if (canEditTenant)
+                                    {
+                                        <a asp-action="Detail"
+                                           asp-route-id="@t.Id"
+                                           class="btn btn-outline-primary btn-sm">
+                                            @L["Common.Detail"]
+                                        </a>
+
+                                        <form asp-action="ToggleActive"
+                                              method="post"
+                                              class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden"
+                                                   name="id"
+                                                   value="@t.Id" />
+
+                                            <button class="btn btn-primary btn-sm"
+                                                    onclick="return confirm('@L["Tenant.ToggleConfirm"]');">
+                                                @(t.IsActive
+                                                                                    ? L["Common.Deactivate"]
+                                                                                    : L["Common.Activate"])
+                                            </button>
+                                        </form>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿@model List<CorrectBonus.Models.Regions.RegionTreeItem>
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+
+@{
+    // 'Has' yöntemi yalnızca 1 parametre alıyor, ikinci parametreyi kaldırın
+    var canCreate = Permission.Has("REGION");
+}
+
+<ul class="region-tree">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="region-tree-item">
+
+                <span class="region-tree-name">
+                    @item.Name
+                </span>
+
+                <span class="region-tree-type">
+                    @item.RegionType
+                </span>
+
+                <span class="status-badge @(item.IsActive ? "status-active" : "status-passive")">
+                    @(item.IsActive
+                                    ? L["Region.Active"]
+                                    : L["Region.Passive"])
+                </span>
+
+                <!-- ADD CHILD -->
+                @if (canCreate)
+                {
+                    <a asp-action="Create"
+                       asp-route-parentId="@item.Id"
+                       class="btn btn-xs btn-outline">
+                        + @L["Region.AddChild"]
+                    </a>
+                }
+
+            </div>
+
+            @if (item.Children != null && item.Children.Any())
+            {
+                <partial name="_RegionTree" model="item.Children" />
+            }
+        </li>
+    }
+</ul>

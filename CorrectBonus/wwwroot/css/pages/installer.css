@@ -1,0 +1,318 @@
+﻿/* ===============================
+   RESET & BASE
+================================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f7fb;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    color: #111827;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.installer-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.installer-card {
+    width: 100%;
+    max-width: 720px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 48px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+
+/* ===============================
+   STEPPER
+================================ */
+.installer-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.installer-step {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+    .installer-step.active {
+        background: #2563eb;
+        color: #ffffff;
+    }
+
+/* ===============================
+   TITLES & TEXT
+================================ */
+.installer-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.installer-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+/* ===============================
+   LANGUAGE SELECT
+================================ */
+.language-options {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.language-option {
+    flex: 1;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all .2s ease;
+}
+
+    .language-option:hover {
+        border-color: #2563eb;
+    }
+
+    .language-option input {
+        accent-color: #2563eb;
+    }
+
+    .language-option span {
+        font-weight: 600;
+    }
+
+/* ===============================
+   FORM
+================================ */
+.form-group {
+    margin-bottom: 16px;
+}
+
+    .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #374151;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+    }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+/* ===============================
+   VALIDATION
+================================ */
+.validation-error {
+    font-size: 12px;
+    color: #dc2626;
+    margin-top: 4px;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.installer-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background: #1e40af;
+    }
+
+.btn-secondary {
+    background: #6b7280;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+    .btn-secondary:hover {
+        background: #4b5563;
+    }
+
+/* ===============================
+   FINISHED
+================================ */
+.installer-finished {
+    text-align: center;
+}
+
+    .installer-finished p {
+        font-size: 14px;
+        color: #6b7280;
+        margin-top: 12px;
+    }
+.installer-container {
+    max-width: 480px;
+    margin: 40px auto;
+}
+
+    .installer-container h1 {
+        margin-bottom: 20px;
+    }
+
+    .installer-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .installer-container input,
+    .installer-container select,
+    .installer-container button {
+        padding: 8px;
+    }
+
+.installer-error {
+    background: #ffe5e5;
+    color: #a00;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+/* ===============================
+   WIZARD STEPS
+   =============================== */
+
+.wizard-steps {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.wizard-step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+    .wizard-step.done {
+        background: #28a745;
+        color: #fff;
+    }
+
+    .wizard-step.active {
+        background: #007bff;
+        color: #fff;
+    }
+
+    .wizard-step.pending {
+        background: #ddd;
+        color: #666;
+    }
+
+.wizard-step-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* ===============================
+   VALIDATION
+   =============================== */
+
+.validation-summary {
+    background: #ffe5e5;
+    color: #a10000;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+/* ===============================
+   BACK BUTTON
+   =============================== */
+
+.wizard-back {
+    margin-top: 16px;
+}
+
+.btn-secondary {
+    background: #eee;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.wizard-spinner {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+    .wizard-spinner.hidden {
+        display: none;
+    }
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

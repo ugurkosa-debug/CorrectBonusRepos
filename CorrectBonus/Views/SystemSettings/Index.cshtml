@@ -1,0 +1,274 @@
+﻿@model Dictionary<string, List<CorrectBonus.Models.SystemManagement.SystemSettingEditVm>>
+@inject CorrectBonus.Services.System.ISystemSettingService Settings
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+@using CorrectBonus.Authorization
+
+@{
+    ViewData["Title"] = L["PageTitle"];
+}
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/system-settings.css"
+          asp-append-version="true" />
+}
+<div class="system-settings">
+    <h3 class="page-title">@L["PageHeader"]</h3>
+
+    <div class="system-settings-grid">
+
+        @foreach (var group in Model)
+        {
+            <div class="form-card">
+
+                <!-- ================= HEADER ================= -->
+                <div class="card-header card-header-flex">
+                    <strong>@group.Key</strong>
+
+                    <div class="card-header-actions">
+
+                        @if (group.Key == "Mail")
+                        {
+                            <span id="mailTestResult" class="small text-muted"></span>
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-primary"
+                                    onclick="testMail()">
+                                @L["MailTest"]
+                            </button>
+                        }
+
+                        @if (group.Key == "Theme")
+                        {
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-primary"
+                                    onclick="resetTheme()">
+                                @L["ResetToDefault"]
+                            </button>
+
+                            <!-- ✅ PREVIEW BUTTON -->
+                            <button type="button"
+                                    class="btn btn-sm btn-outline-secondary"
+                                    onclick="openThemePreview(this)">
+                                @L["Preview"]
+                            </button>
+                        }
+                    </div>
+                </div>
+
+                <!-- ================= FORM ================= -->
+                <form asp-action="SaveGroup"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="group" value="@group.Key" />
+
+                    <div class="card-body">
+
+                        @for (int i = 0; i < group.Value.Count; i++)
+                        {
+                            var setting = group.Value[i];
+
+                            <input type="hidden" name="model[@i].Id" value="@setting.Id" />
+
+                            <div class="setting-row">
+                                <label class="setting-label">
+                                    @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "en"
+                                                                ? setting.DescriptionEn
+                                                                : setting.DescriptionTr)
+                                </label>
+
+                                <div class="setting-control">
+    
+                                    <input type="hidden" name="model[@i].Key" value="@setting.Key" />
+                                    <input type="hidden" name="model[@i].DescriptionTr" value="@setting.DescriptionTr" />
+                                    <input type="hidden" name="model[@i].DescriptionEn" value="@setting.DescriptionEn" />
+
+
+                                    
+                                    @* DEFAULT LANGUAGE *@
+    @if (setting.Key == "App.DefaultLanguage")
+    {
+        <select name="model[@i].Value" class="form-control form-control-half">
+            @if (setting.Value == "tr")
+            {
+                <option value="tr" selected>Türkçe</option>
+                <option value="en">English</option>
+            }
+            else
+            {
+                <option value="tr">Türkçe</option>
+                <option value="en" selected>English</option>
+            }
+        </select>
+    }
+
+    @* THEME COLOR *@
+    else if (group.Key == "Theme"
+          && !string.IsNullOrWhiteSpace(setting.Value)
+          && setting.Value.StartsWith("#"))
+    {
+        <div style="display:flex;gap:10px;align-items:center">
+            <input type="color"
+                   value="@setting.Value"
+                   onchange="syncColor(this, 'txt_@i')" />
+
+            <input type="text"
+                   id="txt_@i"
+                   name="model[@i].Value"
+                   value="@setting.Value"
+                   class="form-control form-control-half"
+                   oninput="syncText(this)" />
+        </div>
+    }
+
+    @* FILE UPLOAD *@
+    else if (setting.Key == "App.LogoPath"
+          || setting.Key == "App.FaviconPath"
+          || setting.Key == "App.LoginBackgroundPath")
+    {
+        if (!string.IsNullOrWhiteSpace(setting.Value))
+        {
+            <img src="@setting.Value"
+                 style="max-height:40px;margin-bottom:6px"
+                 onerror="this.style.display='none'" />
+        }
+
+        <input type="file"
+               id="file_@i"
+               class="form-control form-control-half" />
+
+        <button type="button"
+                class="btn btn-sm btn-secondary mt-1"
+                onclick="uploadAsset('@setting.Key','file_@i')">
+            Yükle
+        </button>
+    }
+
+    @* BOOLEAN *@
+    else if (setting.Value == "true" || setting.Value == "false")
+    {
+        <div class="form-check">
+            <input type="checkbox"
+                   class="form-check-input"
+                   @(setting.Value == "true" ? "checked" : "")
+                   onchange="this.nextElementSibling.value = this.checked ? 'true' : 'false'" />
+
+            <input type="hidden"
+                   name="model[@i].Value"
+                   value="@setting.Value" />
+        </div>
+    }
+
+    @* FOOTER ALIGN *@
+    else if (setting.Key == "Footer.Align")
+    {
+        <div class="footer-align-options">
+            <label>
+                <input type="radio" name="model[@i].Value" value="left"
+                       @(setting.Value == "left" ? "checked" : "") /> Left
+            </label>
+            <label>
+                <input type="radio" name="model[@i].Value" value="center"
+                       @(setting.Value == "center" ? "checked" : "") /> Center
+            </label>
+            <label>
+                <input type="radio" name="model[@i].Value" value="right"
+                       @(setting.Value == "right" ? "checked" : "") /> Right
+            </label>
+        </div>
+    }
+
+    @* DEFAULT TEXT *@
+    else
+    {
+        <input type="text"
+               name="model[@i].Value"
+               value="@setting.Value"
+               class="form-control form-control-half" />
+    }
+
+</div>
+
+                            </div>
+                        }
+                    </div>
+
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            @L["Save"]
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function syncColor(colorInput, textId) {
+            document.getElementById(textId).value = colorInput.value;
+        }
+
+        function syncText(textInput) {
+            const color = textInput.parentElement.querySelector('input[type=color]');
+            if (color && /^#([0-9A-F]{3}){1,2}$/i.test(textInput.value)) {
+                color.value = textInput.value;
+            }
+        }
+
+        function uploadAsset(key, inputId) {
+            const file = document.getElementById(inputId)?.files[0];
+            if (!file) return alert("Dosya seçiniz");
+
+            const fd = new FormData();
+            fd.append("key", key);
+            fd.append("file", file);
+
+            fetch('@Url.Action("UploadApplicationAsset", "SystemSettings")', {
+                method: "POST",
+                headers: {
+                    'RequestVerificationToken':
+                        document.querySelector('input[name="__RequestVerificationToken"]').value
+                },
+                body: fd
+            }).then(() => location.reload());
+        }
+
+        function testMail() {
+            const span = document.getElementById("mailTestResult");
+            span.innerText = "Gönderiliyor...";
+            fetch('@Url.Action("TestMail", "SystemSettings")', { method: "POST" })
+                .then(r => r.json())
+                .then(r => span.innerText = r.success ? "✔ Mail gönderildi" : "❌ " + r.message);
+        }
+
+        function resetTheme() {
+            if (!confirm('@L["ResetThemeConfirm"]')) return;
+
+            fetch('@Url.Action("ResetTheme", "SystemSettings")', {
+                method: "POST",
+                headers: {
+                    'RequestVerificationToken':
+                        document.querySelector('input[name="__RequestVerificationToken"]').value
+                }
+            }).then(() => location.reload());
+        }
+
+        // ✅ PREVIEW
+        function openThemePreview(btn) {
+            const form = btn.closest(".form-card").querySelector("form");
+
+            const win = window.open("", "themePreview", "width=1200,height=800");
+
+            form.action = '@Url.Action("Preview", "ThemePreview")';
+            form.target = "themePreview";
+            form.method = "POST";
+            form.submit();
+
+            form.action = '@Url.Action("SaveGroup", "SystemSettings")';
+            form.target = "";
+        }
+    </script>
+}

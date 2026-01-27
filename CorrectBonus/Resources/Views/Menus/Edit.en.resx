@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="Menu.EditTitle">
+    <value>Edit User</value>
+  </data>
+  <data name="Menu.Title">
+    <value>Title</value>
+  </data>
+  <data name="Menu.Parent">
+    <value>Parent</value>
+  </data>
+  <data name="Menu.Permission">
+    <value>Permission</value>
+  </data>
+  <data name="Menu.PermissionHint">
+    <value>Permission code required to access this menu</value>
+  </data>
+  <data name="Menu.Controller">
+    <value>Controller</value>
+  </data>
+  <data name="Menu.Action">
+    <value>Action</value>
+  </data>
+  <data name="Menu.Order">
+    <value>Order</value>
+  </data>
+</root>

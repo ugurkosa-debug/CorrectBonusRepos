@@ -1,0 +1,100 @@
+﻿@model CorrectBonus.Models.UserManagement.UserCreateVm
+
+@using CorrectBonus.Entities.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject CorrectBonus.Services.Auth.IPermissionService Permission
+@inject IViewLocalizer L
+
+@{
+    ViewData["Title"] = L["User.CreateTitle"];
+
+    // CS1501 düzeltildi: 'Has' yöntemi yalnızca bir parametre alıyor
+    var canCreate = Permission.Has("USER");
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/pages/user-create.css"
+          asp-append-version="true" />
+}
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h3 class="page-title">
+            @L["User.CreateTitle"]
+        </h3>
+    </div>
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <!-- FULL NAME -->
+            <div class="form-group">
+                <label asp-for="FullName">
+                    @L["User.FullName"]
+                </label>
+
+                <input asp-for="FullName"
+                       class="form-control" />
+
+                <span asp-validation-for="FullName"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-group">
+                <label asp-for="Email">
+                    @L["User.Email"]
+                </label>
+
+                <input asp-for="Email"
+                       class="form-control" />
+
+                <span asp-validation-for="Email"
+                      class="text-danger"></span>
+            </div>
+
+            <!-- ROLE -->
+            <div class="form-group">
+                <label asp-for="RoleId">
+                    @L["User.Role"]
+                </label>
+
+                <select asp-for="RoleId"
+                        asp-items="Model.Roles"
+                        class="form-select">
+                    <option value="">
+                        @L["Common.Select"]
+                    </option>
+                </select>
+
+                <span asp-validation-for="RoleId"
+                      class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+
+            @if (canCreate)
+            {
+                <button type="submit"
+                        class="btn btn-primary">
+                    @L["Common.Save"]
+                </button>
+            }
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                @L["Common.Cancel"]
+            </a>
+
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,98 @@
+﻿@model CorrectBonus.Models.Regions.RegionFormViewModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer L
+
+<!-- NAME -->
+<div class="form-group">
+    <label asp-for="Name">@L["Region.Name"]</label>
+    <input asp-for="Name"
+           class="form-control"
+           required />
+</div>
+
+<!-- REGION TYPE -->
+<div class="form-group">
+    <label asp-for="RegionTypeId">@L["Region.RegionType"]</label>
+    <select asp-for="RegionTypeId"
+            asp-items="ViewBag.RegionTypes"
+            class="form-control"
+            required>
+        <option value="">@L["Common.Select"]</option>
+    </select>
+</div>
+
+<!-- PARENT REGION -->
+<div class="form-group">
+    <label asp-for="ParentRegionId">@L["Region.ParentRegion"]</label>
+    <select asp-for="ParentRegionId"
+            asp-items="ViewBag.ParentRegions"
+            class="form-control">
+        <option value="">@L["Common.None"]</option>
+    </select>
+</div>
+
+<!-- MANAGER -->
+<div class="form-group">
+    <label asp-for="ManagerUserId">@L["Region.Manager"]</label>
+    <select asp-for="ManagerUserId"
+            asp-items="ViewBag.Managers"
+            class="form-control"
+            id="managerSelect">
+        <option value="">@L["Common.Select"]</option>
+    </select>
+</div>
+
+<!-- MANAGER ERP (READONLY) -->
+<div class="form-group">
+    <label asp-for="ManagerErpCode">@L["Region.ManagerErpCode"]</label>
+    <input asp-for="ManagerErpCode"
+           class="form-control"
+           readonly />
+</div>
+
+<!-- ERP CODE -->
+<div class="form-group">
+    <label asp-for="ErpCode">@L["Region.ErpCode"]</label>
+    <input asp-for="ErpCode"
+           class="form-control" />
+</div>
+
+<!-- COEFFICIENT -->
+<div class="form-group form-check">
+    <input asp-for="HasCoefficient"
+           type="checkbox"
+           id="hasCoefficient" />
+    <label asp-for="HasCoefficient">
+        @L["Region.HasCoefficient"]
+    </label>
+</div>
+
+<div class="form-group">
+    <label asp-for="Coefficient">@L["Region.Coefficient"]</label>
+    <input asp-for="Coefficient"
+           class="form-control"
+           id="coefficientInput"
+           disabled />
+</div>
+
+<!-- ACTIVE -->
+<div class="form-group form-check">
+    <input asp-for="IsActive"
+           type="checkbox" />
+    <label asp-for="IsActive">@L["Common.Active"]</label>
+</div>
+
+@section Scripts {
+    <script>
+        // Coefficient toggle
+        const chk = document.getElementById('hasCoefficient');
+        const coef = document.getElementById('coefficientInput');
+
+        function toggleCoef() {
+            coef.disabled = !chk.checked;
+            if (!chk.checked) coef.value = '';
+        }
+
+        chk.addEventListener('change', toggleCoef);
+        toggleCoef();
+    </script>
+}

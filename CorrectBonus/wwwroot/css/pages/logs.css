@@ -1,0 +1,59 @@
+﻿/* =========================================================
+   LOGS PAGE
+   ========================================================= */
+
+.logs-page {
+    gap: 16px;
+}
+
+/* -------------------------
+   FILTER
+-------------------------- */
+.log-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.log-filter-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+/* -------------------------
+   MESSAGE COLUMN
+-------------------------- */
+.log-message {
+    max-width: 480px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* -------------------------
+   PAGINATION
+-------------------------- */
+.pagination-wrapper {
+    margin-top: 16px;
+}
+
+.pagination-actions {
+    gap: 6px;
+}
+
+/* -------------------------
+   RESPONSIVE
+-------------------------- */
+@media (max-width: 992px) {
+    .log-filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .log-message {
+        max-width: 100%;
+        white-space: normal;
+    }
+}
+
+
