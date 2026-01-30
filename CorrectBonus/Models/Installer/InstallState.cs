@@ -3,6 +3,7 @@
     public class InstallState
     {
         // STEP 1 - LANGUAGE
+        public int CurrentStep { get; set; } = 1;
         public string? Language { get; set; }
 
         // STEP 2 - SERVER

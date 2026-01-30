@@ -132,47 +132,62 @@
   <data name="Activate" xml:space="preserve">
     <value>Activate</value>
   </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure delete this item?</value>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>New</value>
   </data>
-  <data name="Deactivate" xml:space="preserve">
-    <value>Deactivate</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="NoRecord" xml:space="preserve">
-    <value>No Record Found</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="Menu.Bölgeler" xml:space="preserve">
-    <value>Regions</value>
+  <data name="NoRecord" xml:space="preserve">
+    <value>No Record Found</value>
   </data>
-  <data name="Menu.Companies" xml:space="preserve">
-    <value>Compaines</value>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this item?</value>
   </data>
   <data name="Menu.Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
-  <data name="Menu.KullaniciYonetimi" xml:space="preserve">
+  <data name="Menu.UserManagement" xml:space="preserve">
     <value>User Management</value>
   </data>
-  <data name="Menu.Logout" xml:space="preserve">
-    <value>Logout</value>
+  <data name="Menu.RegionManagement" xml:space="preserve">
+    <value>Region Management</value>
+  </data>
+  <data name="Menu.System" xml:space="preserve">
+    <value>System Management</value>
+  </data>
+  <data name="Menu.Users.List" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Menu.Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Menu.Regions.List" xml:space="preserve">
+    <value>Regions</value>
+  </data>
+  <data name="Menu.RegionTypes" xml:space="preserve">
+    <value>Region Types</value>
+  </data>
+  <data name="Menu.Tenants.List" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="Menu.SystemSettings" xml:space="preserve">
+    <value>System Settings</value>
   </data>
   <data name="Menu.Logs" xml:space="preserve">
     <value>Logs</value>
@@ -180,34 +195,31 @@
   <data name="Menu.Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
-  <data name="Menu.RegionManagement" xml:space="preserve">
-    <value>Region Management</value>
+  <data name="Menu.Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Menu.Bölgeler" xml:space="preserve">
+    <value>Regions</value>
+  </data>
+  <data name="Menu.Companies" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="Menu.KullaniciYonetimi" xml:space="preserve">
+    <value>User Management</value>
   </data>
   <data name="Menu.Regions" xml:space="preserve">
-    <value>Reginos</value>
+    <value>Regions</value>
   </data>
   <data name="Menu.RegionType" xml:space="preserve">
-    <value>Region Type</value>
-  </data>
-  <data name="Menu.RegionTypes" xml:space="preserve">
-    <value>Region Types</value>
-  </data>
-  <data name="Menu.Roles" xml:space="preserve">
-    <value>Roles</value>
-  </data>
-  <data name="Menu.System" xml:space="preserve">
-    <value>System</value>
+    <value>RegionTypes</value>
   </data>
   <data name="Menu.SystemManagement" xml:space="preserve">
     <value>System Management</value>
   </data>
-  <data name="Menu.SystemSettings" xml:space="preserve">
-    <value>System Settings</value>
-  </data>
   <data name="Menu.TenantYönetimi" xml:space="preserve">
-    <value>Tenant Management</value>
+    <value>Companie Management</value>
   </data>
   <data name="Menu.Users" xml:space="preserve">
-    <value>Users</value>
+    <value>Users Management</value>
   </data>
 </root>

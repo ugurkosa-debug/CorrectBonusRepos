@@ -112,7 +112,6 @@ if (isInstalled)
     // SYSTEM SEED
     builder.Services.AddScoped<SystemSeedRunner>();
     builder.Services.AddSingleton<MenuValidationService>();
-    builder.Services.AddScoped<ISystemSeed, MenuSeed>();
 
     // LOCALIZATION
     builder.Services.AddScoped<ICommonLocalizer, CommonLocalizer>();

@@ -4,137 +4,196 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CorrectBonus.Services.System.Seeding
 {
-    public class MenuSeed : ISystemSeed
+    public class MenuSeed
     {
-        public string Version => "1.0.0-menu";
-
         public async Task ApplyAsync(ApplicationDbContext db)
         {
-            // =========================
-            // PARENT MENUS
-            // =========================
-            var systemMenu = await AddOrGetAsync(db,
-                title: "System",
-                resourceKey: "Menu.System",
-                order: 100);
+            // ================= ROOT MENUS =================
 
-            var regionsMenu = await AddOrGetAsync(db,
-                title: "Regions",
-                resourceKey: "Menu.Regions",
-                order: 20);
+            var userMgmt = await AddOrGetRootAsync(db, new Menu
+            {
+                Title = "Kullanıcı Yönetimi",
+                Icon = "fa-users",
+                Order = 10,
+                PermissionCode = "USERS_MENU_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Users"
+            });
 
-            // =========================
-            // CHILD MENUS – USERS / ROLES
-            // =========================
-            await AddOrGetAsync(db,
-                title: "Users",
-                controller: "Users",
-                action: "Index",
-                resourceKey: "Menu.Users",
-                permissionCode: "USERS_VIEW",
-                order: 1);
+            var regionMgmt = await AddOrGetRootAsync(db, new Menu
+            {
+                Title = "Bölge Yönetimi",
+                Icon = "fa-map",
+                Order = 20,
+                PermissionCode = "REGIONS_MENU_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Regions"
+            });
 
-            await AddOrGetAsync(db,
-                title: "Roles",
-                controller: "Roles",
-                action: "Index",
-                resourceKey: "Menu.Roles",
-                permissionCode: "ROLES_VIEW",
-                order: 2);
+            var system = await AddOrGetRootAsync(db, new Menu
+            {
+                Title = "Sistem",
+                Icon = "fa-cogs",
+                Order = 100,
+                PermissionCode = "SYSTEM_MENU_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.System"
+            });
 
-            // =========================
-            // CHILD MENUS – REGIONS
-            // =========================
-            await AddOrGetAsync(db,
-                title: "Regions",
-                controller: "Region",
-                action: "Index",
-                resourceKey: "Menu.Regions",
-                permissionCode: "REGIONS_VIEW",
-                parent: regionsMenu,
-                order: 1);
+            // 🔴 ROOT'ları kaydet → ID'ler gelsin
+            await db.SaveChangesAsync();
 
-            await AddOrGetAsync(db,
-                title: "Region Types",
-                controller: "RegionType",
-                action: "Index",
-                resourceKey: "Menu.RegionTypes",
-                permissionCode: "REGIONTYPES_VIEW",
-                parent: regionsMenu,
-                order: 2);
+            // ================= CHILD MENUS =================
 
-            // =========================
-            // SYSTEM CHILDREN
-            // =========================
-            await AddOrGetAsync(db,
-                title: "System Settings",
-                controller: "SystemSettings",
-                action: "Index",
-                resourceKey: "Menu.SystemSettings",
-                permissionCode: "SYSTEM_SETTINGS_VIEW",
-                parent: systemMenu,
-                order: 1);
+            await AddOrGetChildAsync(db, new Menu
+            {
+                Title = "Kullanıcılar",
+                Controller = "Users",
+                Action = "Index",
+                Icon = "fa-user",
+                Order = 1,
+                ParentId = userMgmt.Id,
+                PermissionCode = "USERS_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Users.List"
+            });
 
-            await AddOrGetAsync(db,
-                title: "Logs",
-                controller: "Logs",
-                action: "Index",
-                resourceKey: "Menu.Logs",
-                permissionCode: "LOGS_VIEW",
-                parent: systemMenu,
-                order: 2);
+            await AddOrGetChildAsync(db, new Menu
+            {
+                Title = "Roller",
+                Controller = "Roles",
+                Action = "Index",
+                Icon = "fa-key",
+                Order = 2,
+                ParentId = userMgmt.Id,
+                PermissionCode = "ROLES_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Roles"
+            });
+
+            // Bölgeler
+            await AddOrGetChildAsync(db, new Menu
+            {
+                Title = "Bölgeler",
+                Controller = "Region",
+                Action = "Index",
+                Icon = "fa-map-marker",
+                Order = 1,
+                ParentId = regionMgmt.Id,
+                PermissionCode = "REGIONS_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Regions.List"
+            });
+
+            // Bölge Tipleri
+            await AddOrGetChildAsync(db, new Menu
+            {
+                Title = "Bölge Tipleri",
+                Controller = "RegionType",
+                Action = "Index",
+                Icon = "fa-tags",
+                Order = 2,
+                ParentId = regionMgmt.Id,
+                PermissionCode = "REGIONTYPES_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.RegionTypes"
+            });
+
+
+            await AddOrGetChildAsync(db, new Menu
+            {
+                Title = "Firmalar",
+                Controller = "Tenants",
+                Action = "Index",
+                Icon = "fa-building",
+                Order = 3,
+                ParentId = system.Id,
+                PermissionCode = "TENANTS_VIEW",
+                IsActive = true,
+                ResourceKey = "Menu.Tenants.List"
+            });
+
+
+            await AddOrGetChildAsync(db, showSystemSettings(system));
+            await AddOrGetChildAsync(db, showLogs(system));
 
             await db.SaveChangesAsync();
         }
 
-        // ==================================================
-        // HELPER
-        // ==================================================
-        private static async Task<Menu> AddOrGetAsync(
-            ApplicationDbContext db,
-            string title,
-            string? controller = null,
-            string? action = null,
-            string? resourceKey = null,
-            string? permissionCode = null,
-            Menu? parent = null,
-            int order = 0)
+        // ================= HELPERS =================
+
+        private Menu showSystemSettings(Menu parent) => new Menu
+        {
+            Title = "Sistem Ayarları",
+            Controller = "SystemSettings",
+            Action = "Index",
+            Icon = "fa-sliders-h",
+            Order = 1,
+            ParentId = parent.Id,
+            PermissionCode = "SYSTEM_SETTINGS_VIEW",
+            IsActive = true,
+            ResourceKey = "Menu.SystemSettings"
+        };
+
+        private Menu showLogs(Menu parent) => new Menu
+        {
+            Title = "Loglar",
+            Controller = "Logs",
+            Action = "Index",
+            Icon = "fa-list",
+            Order = 2,
+            ParentId = parent.Id,
+            PermissionCode = "LOGS_VIEW",
+            IsActive = true,
+            ResourceKey = "Menu.Logs"
+        };
+
+        private async Task<Menu> AddOrGetRootAsync(ApplicationDbContext db, Menu menu)
         {
             var existing = await db.Menus
                 .IgnoreQueryFilters()
-                .FirstOrDefaultAsync(m =>
-                    m.Controller == controller &&
-                    m.Action == action &&
-                    m.ParentId == parent!.Id);
+                .FirstOrDefaultAsync(x =>
+                    x.ParentId == null &&
+                    x.PermissionCode == menu.PermissionCode);
 
             if (existing != null)
             {
-                // 🔒 Güncelle – ama NULL geçme
-                existing.Title = title;
-                existing.ResourceKey = resourceKey ?? existing.ResourceKey;
-                existing.PermissionCode = permissionCode;
-                existing.Order = order;
-                existing.IsActive = true;
-
+                Update(existing, menu);
                 return existing;
             }
 
-            var menu = new Menu
+            db.Menus.Add(menu);
+            return menu;
+        }
+
+        private async Task<Menu> AddOrGetChildAsync(ApplicationDbContext db, Menu menu)
+        {
+            var existing = await db.Menus
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(x =>
+                    x.ParentId == menu.ParentId &&
+                    x.PermissionCode == menu.PermissionCode);
+
+            if (existing != null)
             {
-                Title = title,
-                Controller = controller,
-                Action = action,
-                ResourceKey = resourceKey,
-                PermissionCode = permissionCode,
-                ParentId = parent?.Id,
-                Order = order,
-                IsActive = true
-            };
+                Update(existing, menu);
+                return existing;
+            }
 
             db.Menus.Add(menu);
-            await db.SaveChangesAsync();
-
             return menu;
+        }
+
+        private void Update(Menu target, Menu source)
+        {
+            target.Title = source.Title;
+            target.Icon = source.Icon;
+            target.Order = source.Order;
+            target.Controller = source.Controller;
+            target.Action = source.Action;
+            target.PermissionCode = source.PermissionCode;
+            target.ResourceKey = source.ResourceKey;
+            target.IsActive = true;
         }
     }
 }

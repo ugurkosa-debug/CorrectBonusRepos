@@ -1,93 +1,237 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
+	<!-- 
+		Microsoft ResX Schema
 
-  <!-- ===============================
-       INSTALLER – GENEL
-       =============================== -->
-  <data name="Installer.Title" xml:space="preserve">
-    <value>Kurulum Sihirbazı</value>
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="Installer.Title">
+    <value>CorrectBonus Kurulum Sihirbazı</value>
+  </data>
+  <data name="Installer.StepIndicator">
+    <value>Adım {0} / {1}</value>
   </data>
 
-  <data name="Installer.Step" xml:space="preserve">
-    <value>Adım</value>
-  </data>
-
-  <data name="Installer.CompletedText" xml:space="preserve">
-    <value>Kurulum başarıyla tamamlandı.</value>
-  </data>
-
-  <data name="Installer.GoToApp" xml:space="preserve">
-    <value>Uygulamaya Geç</value>
-  </data>
-
-  <data name="Installer.CreateOwner" xml:space="preserve">
-    <value>Sahip Kullanıcı Oluştur</value>
-  </data>
-
-  <!-- ===============================
-       INSTALLER – ADIM BAŞLIKLARI
-       =============================== -->
-  <data name="Installer.Step.Language" xml:space="preserve">
-    <value>Dil Seçimi</value>
-  </data>
-
-  <data name="Installer.Step.Server" xml:space="preserve">
-    <value>Sunucu Yapılandırması</value>
-  </data>
-
-  <data name="Installer.Step.DbLogin" xml:space="preserve">
-    <value>Veritabanı Girişi</value>
-  </data>
-
-  <data name="Installer.Step.Database" xml:space="preserve">
-    <value>Veritabanı Kurulumu</value>
-  </data>
-
-  <data name="Installer.Step.Mail" xml:space="preserve">
-    <value>E-posta Ayarları</value>
-  </data>
-
-  <data name="Installer.Step.Owner" xml:space="preserve">
-    <value>Uygulama Sahibi</value>
-  </data>
-
-  <data name="Installer.Step.Finish" xml:space="preserve">
-    <value>Tamamlandı</value>
-  </data>
-
-  <!-- ===============================
-       COMMON
-       =============================== -->
-  <data name="Common.Continue" xml:space="preserve">
+  <!-- Buttons -->
+  <data name="Installer.Button.Continue">
     <value>Devam Et</value>
   </data>
-
-  <data name="Common.TestAndContinue" xml:space="preserve">
+  <data name="Installer.Button.TestAndContinue">
     <value>Test Et ve Devam Et</value>
   </data>
-
-  <data name="Common.CreateAndContinue" xml:space="preserve">
+  <data name="Installer.Button.CreateAndContinue">
     <value>Oluştur ve Devam Et</value>
   </data>
-
-  <data name="Common.Back" xml:space="preserve">
+  <data name="Installer.Button.CreateOwner">
+    <value>Owner Oluştur</value>
+  </data>
+  <data name="Installer.Button.GoToApp">
+    <value>Uygulamaya Git</value>
+  </data>
+  <data name="Installer.Button.Back">
     <value>Geri</value>
   </data>
 
-  <data name="Common.Loading" xml:space="preserve">
-    <value>İşleniyor...</value>
+  <!-- Step Titles & Descriptions -->
+  <data name="Installer.Step.Language.Title">
+    <value>Dil Seçimi</value>
+  </data>
+  <data name="Installer.Step.Language.Description">
+    <value>Kurulum sırasında kullanılacak dili seçin.</value>
   </data>
 
+  <data name="Installer.Step.Server.Title">
+    <value>SQL Server Bağlantısı</value>
+  </data>
+  <data name="Installer.Step.Server.Description">
+    <value>SQL Server adresini girerek bağlantıyı test edin.</value>
+  </data>
+
+  <data name="Installer.Step.DbLogin.Title">
+    <value>Veritabanı Kimlik Doğrulama</value>
+  </data>
+  <data name="Installer.Step.DbLogin.Description">
+    <value>SQL Server kullanıcı bilgilerini girin.</value>
+  </data>
+
+  <data name="Installer.Step.Database.Title">
+    <value>Veritabanı Oluşturma</value>
+  </data>
+  <data name="Installer.Step.Database.Description">
+    <value>Uygulamanın kullanacağı veritabanı adını belirleyin.</value>
+  </data>
+
+  <data name="Installer.Step.Mail.Title">
+    <value>E-Posta Ayarları</value>
+  </data>
+  <data name="Installer.Step.Mail.Description">
+    <value>SMTP bilgilerini girerek e-posta gönderimini test edin.</value>
+  </data>
+
+  <data name="Installer.Step.Owner.Title">
+    <value>Owner Kullanıcı</value>
+  </data>
+  <data name="Installer.Step.Owner.Description">
+    <value>Sistemin ilk yetkili kullanıcısını oluşturun.</value>
+  </data>
+
+  <data name="Installer.Step.Finish.Title">
+    <value>Kurulum Tamamlandı</value>
+  </data>
+
+  <data name="Installer.CompletedText">
+    <value>Kurulum başarıyla tamamlandı. Uygulamayı kullanmaya başlayabilirsiniz.</value>
+  </data>
+
+  <!-- Fields -->
+  <data name="Installer.Language.Label">
+    <value>Dil</value>
+  </data>
+
+  <data name="Installer.Server.Label">
+    <value>SQL Server Adresi</value>
+  </data>
+  <data name="Installer.Server.Help">
+    <value>Örnek: localhost veya SERVER\SQLEXPRESS</value>
+  </data>
+
+  <data name="Installer.DbUser.Label">
+    <value>Veritabanı Kullanıcı Adı</value>
+  </data>
+  <data name="Installer.DbUser.Help">
+    <value>SQL Authentication için kullanıcı adı</value>
+  </data>
+
+  <data name="Installer.DbPassword.Label">
+    <value>Veritabanı Şifresi</value>
+  </data>
+  <data name="Installer.DbPassword.Help">
+    <value>SQL kullanıcı şifresi</value>
+  </data>
+
+  <data name="Installer.DatabaseName.Label">
+    <value>Veritabanı Adı</value>
+  </data>
+  <data name="Installer.DatabaseName.Help">
+    <value>Örnek: CorrectBonusApplicationDB</value>
+  </data>
+
+  <data name="Installer.Mail.Host.Label">
+    <value>SMTP Sunucu</value>
+  </data>
+  <data name="Installer.Mail.Port.Label">
+    <value>SMTP Port</value>
+  </data>
+  <data name="Installer.Mail.User.Label">
+    <value>E-Posta Adresi</value>
+  </data>
+  <data name="Installer.Mail.Password.Label">
+    <value>E-Posta Şifresi</value>
+  </data>
+  <data name="Installer.Mail.TestEmail.Label">
+    <value>Test E-Posta Adresi</value>
+  </data>
+  <data name="Installer.Mail.EnableSsl">
+    <value>TLS / SSL Kullan (Önerilir)</value>
+  </data>
+
+  <data name="Installer.OwnerEmail.Label">
+    <value>Owner E-Posta</value>
+  </data>
+  <data name="Installer.OwnerEmail.Help">
+    <value>Bu adrese şifre oluşturma bağlantısı gönderilecektir.</value>
+  </data>
 </root>

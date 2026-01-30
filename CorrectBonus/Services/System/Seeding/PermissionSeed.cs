@@ -46,6 +46,10 @@ namespace CorrectBonus.Services.System.Seeding
                 New("TENANTS_CREATE", "Firmalar", "Tenants", "Firma Oluşturma", "Create Tenant"),
                 New("TENANTS_EDIT",   "Firmalar", "Tenants", "Firma Düzenleme", "Edit Tenant"),
                 New("TENANTS_STATUS", "Firmalar", "Tenants", "Firma Durum", "Change Tenant Status"),
+                // ================= MENU (PAGE PERMISSIONS) =================
+                New("SYSTEM_MENU_VIEW", "Sistem", "System", "Sistem Menüsü", "System Menu"),
+                New("SYSTEM_SETTINGS_MENU_VIEW", "Sistem", "System", "Sistem Ayarları Menüsü", "System Settings Menu"),
+                New("LOGS_MENU_VIEW", "Sistem", "System", "Loglar Menüsü", "Logs Menu"),
 
             };
 

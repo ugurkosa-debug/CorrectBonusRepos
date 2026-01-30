@@ -1,29 +1,18 @@
 ﻿@model CorrectBonus.Models.Installer.InstallState
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer L
-@inject CorrectBonus.Services.Localization.ICommonLocalizer Common
 
 @{
     Layout = "_LayoutInstaller";
-
     ViewData["Title"] = L["Installer.Title"];
 
-    int step =
-        string.IsNullOrEmpty(Model.Language) ? 1 :
-        !Model.ServerConnected ? 2 :
-        !Model.DbAuthenticated ? 3 :
-        !Model.DatabaseCreated ? 4 :
-        !Model.MailTested ? 5 :
-        !Model.OwnerCreated ? 6 :
-        7;
-
+    int step = Model.CurrentStep;
     int totalSteps = 7;
 }
 
+
 @section Styles {
-    <link rel="stylesheet"
-          href="~/css/pages/installer.css"
-          asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/pages/installer.css" asp-append-version="true" />
 }
 
 <div class="installer-container">
@@ -38,9 +27,9 @@
         }
     </div>
 
-    <div class="wizard-step-text">
-        @L["Installer.Step"] @step / @totalSteps
-    </div>
+    <p class="wizard-step-text">
+        @L["Installer.StepIndicator", step, totalSteps]
+    </p>
 
     @if (!string.IsNullOrEmpty(Model.ErrorMessage))
     {
@@ -49,108 +38,152 @@
         </div>
     }
 
+    @* ================= STEP 1 – LANGUAGE ================= *@
     @if (step == 1)
     {
         <form asp-action="SelectLanguage" method="post">
-            <h2>@L["Installer.Step.Language"]</h2>
+            @Html.AntiForgeryToken()
 
-            <select name="language" required>
-                <option value="tr">Türkçe</option>
-                <option value="en">English</option>
-            </select>
+            <label>@L["Installer.Language.Label"]</label>
 
-            <button type="submit">@Common["Continue"]</button>
+            @if (Model.Language == "en")
+            {
+                <select name="language" onchange="this.form.submit()">
+                    <option value="tr">Türkçe</option>
+                    <option value="en" selected>English</option>
+                </select>
+            }
+            else
+            {
+                <select name="language" onchange="this.form.submit()">
+                    <option value="tr" selected>Türkçe</option>
+                    <option value="en">English</option>
+                </select>
+            }
         </form>
-    }
-    else if (step == 2)
-    {
-        <form asp-action="TestServer" method="post">
-            <h2>@L["Installer.Step.Server"]</h2>
-            <input name="server" placeholder="SERVER\\INSTANCE" required />
-            <button type="submit">@Common["TestAndContinue"]</button>
-        </form>
-    }
-    else if (step == 3)
-    {
-        <form asp-action="TestLogin" method="post">
-            <h2>@L["Installer.Step.DbLogin"]</h2>
-            <input name="dbUser" required />
-            <input name="dbPassword" type="password" required />
-            <button type="submit">@Common["TestAndContinue"]</button>
-        </form>
-    }
-    else if (step == 4)
-    {
-        <form asp-action="CreateDatabase" method="post">
-            <h2>@L["Installer.Step.Database"]</h2>
-            <input name="databaseName" required />
-            <button type="submit">@Common["CreateAndContinue"]</button>
-        </form>
-    }
-    else if (step == 5)
-    {
-        <form asp-action="TestMail" method="post">
-            <h2>@L["Installer.Step.Mail"]</h2>
 
-            <input name="smtpHost"
-                   placeholder="smtp.gmail.com"
-                   value="smtp.gmail.com"
-                   required />
-
-            <input name="smtpPort"
-                   value="587"
-                   required />
-
-            <input name="smtpUser"
-                   placeholder="mail@gmail.com"
-                   required />
-
-            <input name="smtpPassword"
-                   type="password"
-                   placeholder="App Password"
-                   required />
-
-            <input name="testEmail"
-                   placeholder="test@mail.com"
-                   required />
-
-            <label class="checkbox">
-                <input type="checkbox"
-                       name="enableSsl"
-                       value="true"
-                       checked />
-                <span>Use TLS / SSL (STARTTLS)</span>
-            </label>
-
+        <form asp-action="NextStep" method="post" style="margin-top:20px;">
+            @Html.AntiForgeryToken()
             <button type="submit">
-                @Common["TestAndContinue"]
+                @L["Installer.Button.Continue"]
             </button>
         </form>
     }
 
+    @* ================= STEP 2 – SERVER ================= *@
+    else if (step == 2)
+    {
+        <form asp-action="TestServer" method="post">
+            <h2>@L["Installer.Step.Server.Title"]</h2>
+            <p class="step-description">@L["Installer.Step.Server.Description"]</p>
+
+            <label>@L["Installer.Server.Label"]</label>
+            <input name="server" placeholder="SERVER\\INSTANCE" required />
+            <small>@L["Installer.Server.Help"]</small>
+
+            <button type="submit">@L["Installer.Button.TestAndContinue"]</button>
+        </form>
+    }
+
+    @* ================= STEP 3 – DB LOGIN ================= *@
+    else if (step == 3)
+    {
+        <form asp-action="TestLogin" method="post">
+            <h2>@L["Installer.Step.DbLogin.Title"]</h2>
+            <p class="step-description">@L["Installer.Step.DbLogin.Description"]</p>
+
+            <label>@L["Installer.DbUser.Label"]</label>
+            <input name="dbUser" required />
+            <small>@L["Installer.DbUser.Help"]</small>
+
+            <label>@L["Installer.DbPassword.Label"]</label>
+            <input name="dbPassword" type="password" required />
+            <small>@L["Installer.DbPassword.Help"]</small>
+
+            <button type="submit">@L["Installer.Button.TestAndContinue"]</button>
+        </form>
+    }
+
+    @* ================= STEP 4 – DATABASE ================= *@
+    else if (step == 4)
+    {
+        <form asp-action="CreateDatabase" method="post">
+            <h2>@L["Installer.Step.Database.Title"]</h2>
+            <p class="step-description">@L["Installer.Step.Database.Description"]</p>
+
+            <label>@L["Installer.DatabaseName.Label"]</label>
+            <input name="databaseName" required />
+            <small>@L["Installer.DatabaseName.Help"]</small>
+
+            <button type="submit">@L["Installer.Button.CreateAndContinue"]</button>
+        </form>
+    }
+
+    @* ================= STEP 5 – MAIL ================= *@
+    else if (step == 5)
+    {
+        <form asp-action="TestMail" method="post">
+            <h2>@L["Installer.Step.Mail.Title"]</h2>
+            <p class="step-description">@L["Installer.Step.Mail.Description"]</p>
+
+            <label>@L["Installer.Mail.Host.Label"]</label>
+            <input name="smtpHost" value="smtp.gmail.com" required />
+
+            <label>@L["Installer.Mail.Port.Label"]</label>
+            <input name="smtpPort" value="587" required />
+
+            <label>@L["Installer.Mail.User.Label"]</label>
+            <input name="smtpUser" required />
+
+            <label>@L["Installer.Mail.Password.Label"]</label>
+            <input name="smtpPassword" type="password" required />
+
+            <label>@L["Installer.Mail.TestEmail.Label"]</label>
+            <input name="testEmail" required />
+
+            <label class="checkbox">
+                <input type="checkbox" name="enableSsl" value="true" checked />
+                <span>@L["Installer.Mail.EnableSsl"]</span>
+            </label>
+
+
+            <button type="submit">@L["Installer.Button.TestAndContinue"]</button>
+        </form>
+    }
+
+    @* ================= STEP 6 – OWNER ================= *@
     else if (step == 6)
     {
         <form asp-action="CreateOwner" method="post">
-            <h2>@L["Installer.Step.Owner"]</h2>
+            <h2>@L["Installer.Step.Owner.Title"]</h2>
+            <p class="step-description">@L["Installer.Step.Owner.Description"]</p>
+
+            <label>@L["Installer.OwnerEmail.Label"]</label>
             <input name="ownerEmail" required />
-            <button type="submit">@L["Installer.CreateOwner"]</button>
+            <small>@L["Installer.OwnerEmail.Help"]</small>
+
+            <button type="submit">@L["Installer.Button.CreateOwner"]</button>
         </form>
     }
+
+    @* ================= STEP 7 – FINISH ================= *@
     else
     {
         <form asp-action="Complete" method="post">
-            <h2>@L["Installer.Step.Finish"]</h2>
+            <h2>@L["Installer.Step.Finish.Title"]</h2>
             <p>@L["Installer.CompletedText"]</p>
-            <button type="submit">@L["Installer.GoToApp"]</button>
+
+            <button type="submit">@L["Installer.Button.GoToApp"]</button>
         </form>
     }
 
     @if (step > 1 && step < 7)
     {
-        <form asp-action="Previous" method="post" class="wizard-back">
-            <button type="submit">← @Common["Back"]</button>
+        <form asp-action="PreviousStep" method="post" class="wizard-back">
+            @Html.AntiForgeryToken()
+            <button type="submit">← @L["Installer.Button.Back"]</button>
         </form>
     }
 
-</div>
 
+</div>

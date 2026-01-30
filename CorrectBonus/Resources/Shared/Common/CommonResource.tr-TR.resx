@@ -132,47 +132,62 @@
   <data name="Activate" xml:space="preserve">
     <value>Aktif Et</value>
   </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Temizle</value>
-  </data>
-  <data name="ConfirmDelete" xml:space="preserve">
-    <value>Silmek istediğinize emin misiniz?</value>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Pasif Et</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Yeni</value>
   </data>
-  <data name="Deactivate" xml:space="preserve">
-    <value>Pasif Et</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Düzenle</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Düzenle</value>
+  <data name="Clear" xml:space="preserve">
+    <value>Temizle</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filtre</value>
   </data>
-  <data name="NoRecord" xml:space="preserve">
-    <value>Kayıt Bulunamadı</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>Ara</value>
   </data>
-  <data name="Menu.Bölgeler" xml:space="preserve">
-    <value>Bölgeler</value>
+  <data name="NoRecord" xml:space="preserve">
+    <value>Kayıt Bulunamadı</value>
   </data>
-  <data name="Menu.Companies" xml:space="preserve">
-    <value>Şirketler</value>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Silmek istediğinize emin misiniz?</value>
   </data>
   <data name="Menu.Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
-  <data name="Menu.KullaniciYonetimi" xml:space="preserve">
+  <data name="Menu.UserManagement" xml:space="preserve">
     <value>Kullanıcı Yönetimi</value>
   </data>
-  <data name="Menu.Logout" xml:space="preserve">
-    <value>Çıkış Yap</value>
+  <data name="Menu.RegionManagement" xml:space="preserve">
+    <value>Bölge Yönetimi</value>
+  </data>
+  <data name="Menu.System" xml:space="preserve">
+    <value>Sistem Yönetimi</value>
+  </data>
+  <data name="Menu.Users.List" xml:space="preserve">
+    <value>Kullanıcılar</value>
+  </data>
+  <data name="Menu.Roles" xml:space="preserve">
+    <value>Roller</value>
+  </data>
+  <data name="Menu.Regions.List" xml:space="preserve">
+    <value>Bölgeler</value>
+  </data>
+  <data name="Menu.RegionTypes" xml:space="preserve">
+    <value>Bölge Tipleri</value>
+  </data>
+  <data name="Menu.Tenants.List" xml:space="preserve">
+    <value>Firmalar</value>
+  </data>
+  <data name="Menu.SystemSettings" xml:space="preserve">
+    <value>Sistem Ayarları</value>
   </data>
   <data name="Menu.Logs" xml:space="preserve">
     <value>Log Kayıtları</value>
@@ -180,34 +195,31 @@
   <data name="Menu.Profile" xml:space="preserve">
     <value>Kullanıcı Profili</value>
   </data>
-  <data name="Menu.RegionManagement" xml:space="preserve">
-    <value>Bölge Yönetimi</value>
+  <data name="Menu.Logout" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="Menu.Bölgeler" xml:space="preserve">
+    <value>Bölgeler</value>
+  </data>
+  <data name="Menu.Companies" xml:space="preserve">
+    <value>Şirketler</value>
+  </data>
+  <data name="Menu.KullaniciYonetimi" xml:space="preserve">
+    <value>Kullanıcı Yönetimi</value>
   </data>
   <data name="Menu.Regions" xml:space="preserve">
-    <value>Bölgeler</value>
+    <value>Bölge Yönetimi</value>
   </data>
   <data name="Menu.RegionType" xml:space="preserve">
     <value>Bölge Tipleri</value>
   </data>
-  <data name="Menu.RegionTypes" xml:space="preserve">
-    <value>Bölge Tipleri</value>
-  </data>
-  <data name="Menu.Roles" xml:space="preserve">
-    <value>Roller</value>
-  </data>
-  <data name="Menu.System" xml:space="preserve">
-    <value>Sistem Yönetimi</value>
-  </data>
   <data name="Menu.SystemManagement" xml:space="preserve">
     <value>Sistem Yönetimi</value>
-  </data>
-  <data name="Menu.SystemSettings" xml:space="preserve">
-    <value>Sistem Ayarları</value>
   </data>
   <data name="Menu.TenantYönetimi" xml:space="preserve">
     <value>Şirket Yönetimi</value>
   </data>
   <data name="Menu.Users" xml:space="preserve">
-    <value>Kullanıcılar</value>
+    <value>Kullanıcı Yönetimi</value>
   </data>
 </root>

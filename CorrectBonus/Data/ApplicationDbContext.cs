@@ -43,20 +43,21 @@ namespace CorrectBonus.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Region>()
-                .HasOne(r => r.RegionType)
-                .WithMany()
-                .HasForeignKey(r => r.RegionTypeId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Region>()
-                .HasOne(r => r.ParentRegion)
-                .WithMany(r => r.Children)
-                .HasForeignKey(r => r.ParentRegionId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+            // ===============================
+            // 🌍 REGION CONFIG
+            // ===============================
             modelBuilder.Entity<Region>(entity =>
             {
+                entity.HasOne(r => r.RegionType)
+                      .WithMany()
+                      .HasForeignKey(r => r.RegionTypeId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(r => r.ParentRegion)
+                      .WithMany(r => r.Children)
+                      .HasForeignKey(r => r.ParentRegionId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
                 entity.Property(x => x.Coefficient)
                       .HasPrecision(18, 4);
 
@@ -64,53 +65,52 @@ namespace CorrectBonus.Data
                       .HasPrecision(18, 4);
             });
 
+            // ===============================
+            // 👤 USER CONFIG
+            // ===============================
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.Id);
+                // Başka bir mapping GEREKMİYOR
             });
-            // ===============================
-            // RBAC CONFIG (MEVCUT)
-            // ===============================
-            modelBuilder.Entity<RolePermission>()
-                .HasKey(x => new { x.RoleId, x.PermissionId });
-
-            modelBuilder.Entity<RolePermission>()
-                .HasOne(x => x.Role)
-                .WithMany(r => r.RolePermissions)
-                .HasForeignKey(x => x.RoleId);
-
-            modelBuilder.Entity<RolePermission>()
-                .HasOne(x => x.Permission)
-                .WithMany(p => p.RolePermissions)
-                .HasForeignKey(x => x.PermissionId);
-
-            modelBuilder.Entity<RoleActionPermission>()
-                .HasIndex(x => new { x.RoleId, x.PermissionId, x.Action })
-                .IsUnique();
-
-            modelBuilder.Entity<RoleActionPermission>()
-                .HasOne(x => x.Role)
-                .WithMany(r => r.RoleActionPermissions)
-                .HasForeignKey(x => x.RoleId);
-
-            modelBuilder.Entity<RoleActionPermission>()
-                .HasOne(x => x.Permission)
-                .WithMany()
-                .HasForeignKey(x => x.PermissionId);
 
             // ===============================
-            // 🌍 REGION CONFIG
+            // 🔐 RBAC CONFIG
             // ===============================
-            modelBuilder.Entity<Region>()
-                .HasOne(x => x.ParentRegion)
-                .WithMany(x => x.Children)
-                .HasForeignKey(x => x.ParentRegionId)
-                .OnDelete(DeleteBehavior.Restrict);
+
+            // ---- RolePermission (COMPOSITE KEY) ----
+            modelBuilder.Entity<RolePermission>(entity =>
+            {
+                entity.HasKey(x => new { x.RoleId, x.PermissionId });
+
+                entity.HasOne(x => x.Role)
+                      .WithMany(r => r.RolePermissions)
+                      .HasForeignKey(x => x.RoleId);
+
+                entity.HasOne(x => x.Permission)
+                      .WithMany(p => p.RolePermissions)
+                      .HasForeignKey(x => x.PermissionId);
+            });
 
 
+            // ---- RoleActionPermission ----
+            modelBuilder.Entity<RoleActionPermission>(entity =>
+            {
+                entity.HasKey(x => new { x.RoleId, x.PermissionId, x.Action });
+
+                entity.HasOne(x => x.Role)
+                      .WithMany(r => r.RoleActionPermissions)
+                      .HasForeignKey(x => x.RoleId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(x => x.Permission)
+                      .WithMany()
+                      .HasForeignKey(x => x.PermissionId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
 
             // ===============================
-            // 🌍 GLOBAL TENANT QUERY FILTER (SAFE)
+            // 🌍 GLOBAL TENANT QUERY FILTER
             // ===============================
             ApplyTenantQueryFilter(modelBuilder);
         }
